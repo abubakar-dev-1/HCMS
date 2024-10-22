@@ -72,7 +72,6 @@ export default function ProductPage() {
             fields: ["url", "alternativeText"],
           },
         },
-        pagination: { limit: 4 },
       });
 
       const res = await fetch(url.toString());
@@ -86,22 +85,22 @@ export default function ProductPage() {
         (p: Product) => p.documentId !== currentProductId
       );
 
-      setRelatedProducts(filteredProducts.length > 1 ? filteredProducts : []);
+      setRelatedProducts(filteredProducts);
     } catch (error) {
       console.error("Error fetching related products:", error);
     }
   }
 
   const sliderSettings = {
-    infinite: true,
+    infinite: false, // Disable infinite looping
     speed: 500,
-    slidesToShow: 3,
+    slidesToShow: Math.min(relatedProducts.length, 3), // Adjust number of slides shown based on available products
     slidesToScroll: 1,
-    arrows: false, // Disable default arrows
+    arrows: false,
     responsive: [
       {
         breakpoint: 1024,
-        settings: { slidesToShow: 2 },
+        settings: { slidesToShow: Math.min(relatedProducts.length, 2) },
       },
       {
         breakpoint: 600,
@@ -118,44 +117,33 @@ export default function ProductPage() {
 
       <main className="my-40 px-4 md:px-20 xl:px-40 w-full flex flex-col">
         {product ? (
-          <div>
-            <div className="w-full flex flex-col lg:flex-row gap-12 lg:gap-20">
-              <div className="w-full md:w-1/2">
-                <img
-                  src={`${process.env.NEXT_PUBLIC_API_URL}${product.productImage?.url}`}
-                  alt={product.productImage?.alternativeText || product.productTitle}
-                  className="w-full h-auto object-cover rounded-lg shadow-lg"
-                />
-              </div>
+          <div className="w-full flex flex-col lg:flex-row gap-12 lg:gap-20">
+            <div className="w-full md:w-1/2">
+              <img
+                src={`${process.env.NEXT_PUBLIC_API_URL}${product.productImage?.url}`}
+                alt={product.productImage?.alternativeText || product.productTitle}
+                className="w-full h-auto object-cover rounded-lg shadow-lg"
+              />
+            </div>
 
-              <div className="w-full md:w-1/2">
-                <p className="text-sm font-semibold text-gray-500 italic">
-                  {`${product.productCategory} > ${product.productSubCategory}`}
+            <div className="w-full md:w-1/2">
+              <p className="text-sm font-semibold text-gray-500 italic">
+                {`${product.productCategory} > ${product.productSubCategory}`}
+              </p>
+
+              <h2 className="text-3xl font-bold mt-4">{product.productTitle}</h2>
+
+              <p className="prose mt-6">{product.productDescription}</p>
+
+              <div className="mt-8">
+                <p className="text-lg">
+                  <span className="font-semibold">SKU:</span> {product.SKU}
                 </p>
-
-                <h2 className="text-3xl font-bold mt-4">{product.productTitle}</h2>
-
-                <p className="prose mt-6">
-                  {product.productDescription.slice(0, 150)}...
-                  <button
-                    onClick={() => router.push(`/product/${product.documentId}`)}
-                    className="text-blue-600 ml-2"
-                  >
-                    Read More
-                  </button>
+                <p className="text-lg mt-2">
+                  <span className="font-semibold">Price:</span> ${product.productPrice}
                 </p>
-
-                <div className="mt-8">
-                  <p className="text-lg">
-                    <span className="font-semibold">SKU:</span> {product.SKU}
-                  </p>
-                  <p className="text-lg mt-2">
-                    <span className="font-semibold">Price:</span> ${product.productPrice}
-                  </p>
-                </div>
               </div>
             </div>
-            <p className="mt-5 flex flex-wrap">{product.productDetail}</p>
           </div>
         ) : (
           <p>Loading product data...</p>
@@ -187,7 +175,6 @@ export default function ProductPage() {
                 ))}
               </Slider>
 
-              {/* Custom Arrows Below the Cards */}
               <div className="flex justify-center gap-5 items-center mt-4">
                 <button
                   className="text-3xl"
@@ -205,7 +192,9 @@ export default function ProductPage() {
             </div>
           </section>
         ) : (
-          <p className="mt-20 text-gray-500 text-center">No related products available.</p>
+          <p className="mt-20 text-gray-500 text-center">
+            No related products available.
+          </p>
         )}
       </main>
     </>
