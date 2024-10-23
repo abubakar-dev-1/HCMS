@@ -10,36 +10,50 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import Newsletter from "./newsletter";
 
+// Define the structure of a product
 interface Product {
   id: number;
   productCategory: string;
 }
 
+// Define the structure of the API response
+interface ApiResponse {
+  data: Product[];
+}
+
 const Footer = () => {
-  const [categories, setCategories] = useState<string[]>([]); // State to store unique categories
+  // State to store unique categories
+  const [categories, setCategories] = useState<string[]>([]);
 
   // Fetch products and extract unique categories
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const baseUrl = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:1337";
+        const baseUrl =
+          process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:1337";
         const response = await fetch(`${baseUrl}/api/products`);
-        const data = await response.json();
+        const data: ApiResponse = await response.json();
 
-        console.log('Fetched Data:', data); // Check API response
+        console.log("Fetched Data:", data); // Check API response
 
+        // Ensure data contains the expected array of products
         if (!Array.isArray(data.data)) {
           throw new Error("Unexpected API response structure");
         }
 
         // Extract unique categories from the products
         const uniqueCategories = Array.from(
-          new Set(data.data.map((product: any) => product.productCategory || "Uncategorized"))
+          new Set(
+            data.data.map(
+              (product) => product.productCategory || "Uncategorized"
+            )
+          )
         );
 
-        console.log('Unique Categories:', uniqueCategories); // Debug log to verify categories
+        console.log("Unique Categories:", uniqueCategories); // Debug log to verify categories
 
-        setCategories(uniqueCategories); // Update state with unique categories
+        // Update state with unique categories
+        setCategories(uniqueCategories);
       } catch (error) {
         console.error("Error fetching products:", error);
       }
@@ -129,7 +143,9 @@ const Footer = () => {
         </div>
 
         <div className="md:flex hidden flex-col items-center">
-          <h1 className="text-white text-lg w-[200px] font-medium">Other Companies</h1>
+          <h1 className="text-white text-lg w-[200px] font-medium">
+            Other Companies
+          </h1>
           <div>
             <img
               src="/footer/agridairy.png"
