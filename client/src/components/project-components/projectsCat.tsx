@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import { AiOutlineArrowRight } from "react-icons/ai";
 import AnimateToView from "../AnimateToView";
 import { Project } from "@/types/all-types"; // Assuming this is your defined Project type
-import qs from 'qs';
+import qs from "qs";
 import { AiOutlineArrowUp } from "react-icons/ai";
 
 const ProjectsCat = () => {
@@ -58,14 +58,19 @@ const ProjectsCat = () => {
   return (
     <div className="px-4 overflow-hidden md:px-20 xl:px-40 md:py-20 py-10 w-full">
       <AnimateToView>
-        <h1 className="md:text-[40px] text-[30px] mb-3 text-white">Our Projects.</h1>
+        <h1 className="md:text-[40px] text-[30px] mb-3 text-white">
+          Our Projects.
+        </h1>
       </AnimateToView>
       <div className="flex px-2 mt-5">
         <div>
           <AnimateToView className="flex gap-4 w-full">
             <div className="md:block hidden w-[250px] mt-3 ml-[-30px] h-[1px] bg-white" />
             <p className="text-white md:text-2xl font-light">
-              Our project prioritizes livestock well-being, modernizing farming practices, empowering farmers with training and resources, and promoting resilience. Together, let's build a thriving livestock community for a brighter future.
+              Our project prioritizes livestock well-being, modernizing farming
+              practices, empowering farmers with training and resources, and
+              promoting resilience. Together, let's build a thriving livestock
+              community for a brighter future.
             </p>
           </AnimateToView>
 
@@ -74,11 +79,10 @@ const ProjectsCat = () => {
               {projects.length > 0 ? (
                 projects
                   .filter((project) => {
-                   
                     if (displayedCategories.has(project.projCategory)) {
-                      return false; 
+                      return false;
                     }
-                    
+
                     displayedCategories.add(project.projCategory);
                     return true;
                   })
@@ -92,9 +96,22 @@ const ProjectsCat = () => {
                         {/* Add consistent width and height to the container */}
                         <div className="w-[350px] h-[250px] md:w-[450px] md:h-[300px] overflow-hidden">
                           <img
-                            src={`${process.env.NEXT_PUBLIC_BASE_URL}${project.projImage?.url}`}
-                            alt={project.projImage?.alternativeText || project.projTitle}
-                            className="w-full h-full object-cover transition duration-200 ease-in-out transform md:group-hover:scale-105"
+                            src={
+                              project.projImage?.url?.startsWith("http")
+                                ? project.projImage.url
+                                : `${process.env.NEXT_PUBLIC_BASE_URL}${project.projImage?.url}`
+                            }
+                            alt={
+                              project.projImage?.alternativeText || project.projTitle
+                            }
+                            className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
+                            onError={(e) => {
+                              console.error(
+                                "Image failed to load:",
+                                project.projImage?.url
+                              );
+                              e.currentTarget.src = "/fallback-image.jpg"; // Optional fallback image
+                            }}
                           />
                         </div>
                         <div className="absolute inset-0 bg-DG cursor-pointer bg-opacity-50 flex flex-col justify-center items-center opacity-0 transition-opacity duration-200 ease-in-out group-hover:opacity-100 p-6">
