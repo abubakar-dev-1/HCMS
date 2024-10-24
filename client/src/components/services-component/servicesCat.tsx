@@ -15,7 +15,7 @@ const ServiceCat = () => {
   useEffect(() => {
     const fetchServices = async () => {
       try {
-        const baseUrl = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:1337";
+        const baseUrl = process.env.NEXT_PUBLIC_API_URL ;
         const path = "/api/services";
 
         // Construct the query with 'populate' for fetching images

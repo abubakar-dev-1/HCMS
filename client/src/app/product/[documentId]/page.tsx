@@ -29,7 +29,7 @@ export default function ProductPage() {
 
   async function fetchProduct(id: string) {
     try {
-      const baseUrl = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:1337";
+      const baseUrl = process.env.NEXT_PUBLIC_API_URL ;
       const path = `/api/products/${id}`;
 
       const url = new URL(path, baseUrl);
@@ -61,7 +61,7 @@ export default function ProductPage() {
 
   async function fetchRelatedProducts(category: string, currentProductId: string) {
     try {
-      const baseUrl = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:1337";
+      const baseUrl = process.env.NEXT_PUBLIC_API_URL;
       const path = `/api/products`;
 
       const url = new URL(path, baseUrl);

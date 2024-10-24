@@ -10,7 +10,7 @@ import Navbar from "@/components/navbar";
 
 // Fetch products with populated images from Strapi
 async function getProducts(page: number): Promise<{ products: Product[]; total: number }> {
-  const baseUrl = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:1337";
+  const baseUrl = process.env.NEXT_PUBLIC_API_URL;
   const path = "/api/products";
 
   const url = new URL(path, baseUrl);

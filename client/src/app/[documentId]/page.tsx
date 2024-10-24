@@ -30,7 +30,7 @@ export default function ServicePage() {
 
   async function fetchServices(id: string) {
     try {
-      const baseUrl = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:1337";
+      const baseUrl = process.env.NEXT_PUBLIC_API_URL ;
       const path = `/api/services/${id}`;
       const url = new URL(path, baseUrl);
 
@@ -55,7 +55,7 @@ export default function ServicePage() {
 
   async function fetchAllServices() {
     try {
-      const baseUrl = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:1337";
+      const baseUrl = process.env.NEXT_PUBLIC_API_URL ;
       const path = `/api/services`;
 
       const url = new URL(path, baseUrl);

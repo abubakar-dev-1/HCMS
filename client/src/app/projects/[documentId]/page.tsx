@@ -21,7 +21,7 @@ export default function ProjectPage() {
 
   async function fetchProject(id: string) {
     try {
-      const baseUrl = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:1337";
+      const baseUrl = process.env.NEXT_PUBLIC_API_URL ;
       const path = `/api/projects/${id}`;
       const url = new URL(path, baseUrl);
 

@@ -18,7 +18,7 @@ export default function ProductsByCategoryPage() {
   useEffect(() => {
     const fetchProjects = async () => {
       try {
-        const baseUrl = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:1337";
+        const baseUrl = process.env.NEXT_PUBLIC_API_URL ;
         const path = "/api/products";
 
         // Query to fetch projects by category
