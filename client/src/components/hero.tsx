@@ -25,6 +25,8 @@ const Hero = () => {
         return `${process.env.NEXT_PUBLIC_BASE_URL}${imgObj.url}`;
       });
 
+      console.log("images are ", imageUrls)
+
       setImages(imageUrls || []);
     } catch (error) {
       console.error("Error fetching hero images:", error);
