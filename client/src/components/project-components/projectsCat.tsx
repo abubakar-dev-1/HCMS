@@ -14,7 +14,7 @@ const ProjectsCat = () => {
   useEffect(() => {
     const fetchProjects = async () => {
       try {
-        const baseUrl = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:1337";
+        const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
         const path = "/api/projects"; // Assuming your endpoint is /api/projects
 
         // Construct the query with 'populate' for fetching images
@@ -92,7 +92,7 @@ const ProjectsCat = () => {
                         {/* Add consistent width and height to the container */}
                         <div className="w-[350px] h-[250px] md:w-[450px] md:h-[300px] overflow-hidden">
                           <img
-                            src={`${process.env.NEXT_PUBLIC_API_URL}${project.projImage?.url}`}
+                            src={`${process.env.NEXT_PUBLIC_BASE_URL}${project.projImage?.url}`}
                             alt={project.projImage?.alternativeText || project.projTitle}
                             className="w-full h-full object-cover transition duration-200 ease-in-out transform md:group-hover:scale-105"
                           />

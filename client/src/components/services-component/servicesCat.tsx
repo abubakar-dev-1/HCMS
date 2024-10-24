@@ -15,7 +15,7 @@ const ServiceCat = () => {
   useEffect(() => {
     const fetchServices = async () => {
       try {
-        const baseUrl = process.env.NEXT_PUBLIC_API_URL ;
+        const baseUrl = process.env.NEXT_PUBLIC_BASE_URL ;
         const path = "/api/services";
 
         // Construct the query with 'populate' for fetching images
@@ -82,7 +82,7 @@ const ServiceCat = () => {
                 <Link href={`/${service.documentId}`}>
                   <div className="w-full h-full rounded-lg overflow-hidden group cursor-pointer relative">
                     <img
-                      src={`${process.env.NEXT_PUBLIC_API_URL}${service.heroImage?.url}`}
+                      src={`${process.env.NEXT_PUBLIC_BASE_URL}${service.heroImage?.url}`}
                       alt={service.heroImage?.alternativeText || service.name}
                       className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
                     />

@@ -18,7 +18,7 @@ export default function RelatedProducts({ product }: { product: Product }) {
   async function fetchProducts() {
     try {
       const res = await axios.get(
-        `${process.env.NEXT_PUBLIC_BASE_URI}/products?category=${product.productCategory}&limit=${limit}&page=${page}`
+        `${process.env.NEXT_PUBLIC_BASE_URL}/products?category=${product.productCategory}&limit=${limit}&page=${page}`
       );
       if (res.status === 200) {
         let prods = res.data.products.filter(

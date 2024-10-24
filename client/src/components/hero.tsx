@@ -18,11 +18,11 @@ const Hero = () => {
   const fetchHeroImages = async () => {
     try {
       const res = await fetch(
-        `${process.env.NEXT_PUBLIC_API_URL}/api/hero-images?populate[heroImages][fields][0]=url&populate[heroImages][fields][1]=alternativeText`
+        `${process.env.NEXT_PUBLIC_BASE_URL}/api/hero-images?populate[heroImages][fields][0]=url&populate[heroImages][fields][1]=alternativeText`
       );
       const data = await res.json();
       const imageUrls = data.data[0]?.heroImages.map((imgObj: any) => {
-        return `${process.env.NEXT_PUBLIC_API_URL}${imgObj.url}`;
+        return `${process.env.NEXT_PUBLIC_BASE_URL}${imgObj.url}`;
       });
 
       setImages(imageUrls || []);

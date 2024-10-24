@@ -16,7 +16,7 @@ const ProductCat = () => {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const baseUrl = process.env.NEXT_PUBLIC_API_URL ?? 'http://localhost:1337';
+        const baseUrl = process.env.NEXT_PUBLIC_BASE_URL ?? 'http://localhost:1337';
         const path = '/api/products';
 
         const query = qs.stringify({
@@ -98,7 +98,7 @@ const ProductCat = () => {
                         router.push(`/product/category/${product.productCategory}`)
                       }
                       className="w-full h-48 rounded-lg overflow-hidden object-cover hover:scale-110 transition-transform duration-300"
-                      src={`${process.env.NEXT_PUBLIC_API_URL}${product.productImage?.url}`}
+                      src={`${process.env.NEXT_PUBLIC_BASE_URL}${product.productImage?.url}`}
                       alt={
                         product.productImage?.alternativeText || product.productTitle
                       }

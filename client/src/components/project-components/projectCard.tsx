@@ -15,7 +15,7 @@ export default function ProjectCard({ project }: { project: Project }) {
     const truncatedDescription = project.html
 
     const imageUrl = `${
-      process.env.NEXT_PUBLIC_API_URL 
+      process.env.NEXT_PUBLIC_BASE_URL
     }${project.projImage?.url || '/default-image.jpg'}`;
 
   return (

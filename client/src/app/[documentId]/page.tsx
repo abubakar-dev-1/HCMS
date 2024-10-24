@@ -30,7 +30,7 @@ export default function ServicePage() {
 
   async function fetchServices(id: string) {
     try {
-      const baseUrl = process.env.NEXT_PUBLIC_API_URL ;
+      const baseUrl = process.env.NEXT_PUBLIC_BASE_URL ;
       const path = `/api/services/${id}`;
       const url = new URL(path, baseUrl);
 
@@ -55,7 +55,7 @@ export default function ServicePage() {
 
   async function fetchAllServices() {
     try {
-      const baseUrl = process.env.NEXT_PUBLIC_API_URL ;
+      const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
       const path = `/api/services`;
 
       const url = new URL(path, baseUrl);
@@ -87,7 +87,7 @@ export default function ServicePage() {
           <>
             <div className="h-screen flex items-center justify-center relative w-full overflow-hidden">
               <img
-                src={`${process.env.NEXT_PUBLIC_API_URL}${service?.heroImage?.url}`}
+                src={`${process.env.NEXT_PUBLIC_BASE_URL}${service?.heroImage?.url}`}
                 alt={service?.heroImage?.alternativeText || service?.heroHeadings}
                 className="object-cover w-full h-full"
               />
@@ -99,7 +99,7 @@ export default function ServicePage() {
             <div className="px-4 md:px-20 xl:px-40 w-full flex flex-col gap-20">
               <div className="w-full flex gap-20">
                 <img
-                  src={`${process.env.NEXT_PUBLIC_API_URL}${service?.serviceImage?.url}`}
+                  src={`${process.env.NEXT_PUBLIC_BASE_URL}${service?.serviceImage?.url}`}
                   alt={service?.serviceImage?.alternativeText || service?.heroHeadings}
                   className="hidden lg:block w-[50%]"
                 />
@@ -121,7 +121,7 @@ export default function ServicePage() {
                     onClick={() => router.push(`/${service.documentId}`)}
                   >
                     <img
-                      src={`${process.env.NEXT_PUBLIC_API_URL}${service.serviceImage?.url}`}
+                      src={`${process.env.NEXT_PUBLIC_BASE_URL}${service.serviceImage?.url}`}
                       alt={service.serviceImage?.alternativeText || service.name}
                       className="w-full h-40 object-cover rounded-t-md"
                     />
@@ -135,7 +135,7 @@ export default function ServicePage() {
 
             <div className="h-screen flex items-center justify-center relative w-full overflow-hidden">
               <img
-                src={`${process.env.NEXT_PUBLIC_API_URL}${service?.ctaImage?.url}`}
+                src={`${process.env.NEXT_PUBLIC_BASE_URL}${service?.ctaImage?.url}`}
                 alt={service?.ctaImage?.alternativeText || service?.ctaText}
                 className="object-cover w-[90%] h-[80%]"
               />

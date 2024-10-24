@@ -29,7 +29,7 @@ export default function ProductPage() {
 
   async function fetchProduct(id: string) {
     try {
-      const baseUrl = process.env.NEXT_PUBLIC_API_URL ;
+      const baseUrl = process.env.NEXT_PUBLIC_BASE_URL ;
       const path = `/api/products/${id}`;
 
       const url = new URL(path, baseUrl);
@@ -61,7 +61,7 @@ export default function ProductPage() {
 
   async function fetchRelatedProducts(category: string, currentProductId: string) {
     try {
-      const baseUrl = process.env.NEXT_PUBLIC_API_URL;
+      const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
       const path = `/api/products`;
 
       const url = new URL(path, baseUrl);
@@ -120,7 +120,7 @@ export default function ProductPage() {
           <div className="w-full flex flex-col lg:flex-row gap-12 lg:gap-20">
             <div className="w-full md:w-1/2">
               <img
-                src={`${process.env.NEXT_PUBLIC_API_URL}${product.productImage?.url}`}
+                src={`${process.env.NEXT_PUBLIC_BASE_URL}${product.productImage?.url}`}
                 alt={product.productImage?.alternativeText || product.productTitle}
                 className="w-full h-auto object-cover rounded-lg shadow-lg"
               />
@@ -159,7 +159,7 @@ export default function ProductPage() {
                     <div className="bg-white shadow-md rounded-lg p-4 hover:shadow-lg transition">
                       <Link href={`/product/${relatedProduct.documentId}`}>
                         <img
-                          src={`${process.env.NEXT_PUBLIC_API_URL}${relatedProduct.productImage?.url}`}
+                          src={`${process.env.NEXT_PUBLIC_BASE_URL}${relatedProduct.productImage?.url}`}
                           alt={relatedProduct.productImage?.alternativeText || relatedProduct.productTitle}
                           className="w-full h-40 object-contain rounded-md"
                         />

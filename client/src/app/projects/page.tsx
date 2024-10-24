@@ -13,7 +13,7 @@ import Navbar from "@/components/navbar";
 // }
 
 async function getProjects(page: number): Promise<{ project: Project[]; total: number }> {
-  const baseUrl = process.env.NEXT_PUBLIC_API_URL
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL
   const path = "/api/projects";
 
   const url = new URL(path, baseUrl);

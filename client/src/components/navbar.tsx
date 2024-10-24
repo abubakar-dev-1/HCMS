@@ -35,7 +35,7 @@ const Navbar = () => {
   useEffect(() => {
     const fetchServices = async () => {
       try {
-        const baseUrl = process.env.NEXT_PUBLIC_API_URL ;
+        const baseUrl = process.env.NEXT_PUBLIC_BASE_URL ;
         const path = "/api/services";
 
         const url = new URL(path, baseUrl);
@@ -86,7 +86,7 @@ const Navbar = () => {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const baseUrl = process.env.NEXT_PUBLIC_API_URL ;
+        const baseUrl = process.env.NEXT_PUBLIC_BASE_URL ;
         const path = "/api/products";
 
         const url = new URL(path, baseUrl);

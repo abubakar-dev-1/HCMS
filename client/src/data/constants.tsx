@@ -64,7 +64,7 @@ export default function useNavLinks() {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const baseUrl = process.env.NEXT_PUBLIC_API_URL ?? 'http://localhost:1337';
+        const baseUrl = process.env.NEXT_PUBLIC_BASE_URL ;
         const response = await fetch(`${baseUrl}/api/products`);
         const data = await response.json();
 
