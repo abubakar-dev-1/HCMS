@@ -21,9 +21,14 @@ const Hero = () => {
         `${process.env.NEXT_PUBLIC_BASE_URL}/api/hero-images?populate[heroImages][fields][0]=url&populate[heroImages][fields][1]=alternativeText`
       );
       const data = await res.json();
-      const imageUrls = data.data[0]?.heroImages.map((imgObj: any) => {
-        return `${process.env.NEXT_PUBLIC_BASE_URL}${imgObj.url}`;
+      const imageUrls = data.data[0]?.heroImages?.map((imgObj: any) => {
+        const imgUrl = imgObj.url.startsWith('http')
+          ? imgObj.url
+          : `${process.env.NEXT_PUBLIC_BASE_URL}${imgObj.url}`;
+        return imgUrl;
       });
+      console.log("Clean Image URLs:", imageUrls);
+      setImages(imageUrls || []);
       
       console.log("images are ", imageUrls)
 
