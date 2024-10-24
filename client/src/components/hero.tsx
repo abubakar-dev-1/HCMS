@@ -22,10 +22,10 @@ const Hero = () => {
       );
       const data = await res.json();
       const imageUrls = data.data[0]?.heroImages.map((imgObj: any) => {
-        console.log("images are ", imageUrls)
         return `${process.env.NEXT_PUBLIC_BASE_URL}${imgObj.url}`;
       });
-
+      
+      console.log("images are ", imageUrls)
 
       setImages(imageUrls || []);
     } catch (error) {
