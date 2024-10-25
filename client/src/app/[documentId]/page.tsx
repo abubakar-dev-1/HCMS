@@ -54,7 +54,8 @@ export default function ServicePage() {
       const serviceData = data?.data || null;
 
       setService(serviceData);
-      setContent(serviceData?.serviceContent || null); // Extract and set serviceContent
+      setContent(serviceData?.serviceContent || null);
+      console.log(content) // Extract and set serviceContent
     } catch (error: any) {
       console.error("Error fetching service:", error);
       setError(
