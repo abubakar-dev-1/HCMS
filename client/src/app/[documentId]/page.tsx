@@ -147,11 +147,11 @@ export default function ServicePage() {
             {/* Styled Content Section */}
             <div className="w-full lg:w-1/2 flex flex-col gap-6 p-6 bg-gray-50 rounded-lg shadow-md">
               {content ? (
-                <div className="content-container w-[20%] prose lg:prose-xl max-w-none">
+                <div className="content-container  prose lg:prose-xl max-w-none">
                   <BlocksRenderer content={content} />
                 </div>
               ) : (
-                <p>No content available</p>
+                <p> No content available</p>
               )}
 
               <ReactMarkdown className="prose prose-sm md:prose-lg">
