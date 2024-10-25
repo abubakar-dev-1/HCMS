@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 const Contact = () => {
   return (
     <div
-      className="relative w-full flex h-auto justify-between bg-cover pt-32 bg-center"
+      className="relative w-full flex flex-col  lg:flex-row h-auto justify-between bg-cover pt-32 bg-center"
       style={{ backgroundImage: "url(/contactus/contactimg.jpeg)" }}
     >
       {/* Overlay for better text visibility */}
@@ -21,7 +21,7 @@ const Contact = () => {
       </div>
 
       {/* Centered Contact Form */}
-      <div className="relative z-10 pb-3 w-[100%] flex justify-end items-end">
+      <div className="relative z-10 pb-3 w-[100%] mb-3 lg:mb-0 flex justify-center lg:justify-end items-center lg:items-end">
         <ContactComp />
       </div>
     </div>

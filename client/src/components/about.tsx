@@ -7,15 +7,15 @@ import Link from 'next/link'; // Use Link from next/link for navigation
 export default function About() {
   return (
     <>
-    <div className='md:block lg:flex items-center justify-center px-8'>
+    <div className='md:block lg:flex items-start md:items-center justify-start md:justify-center px-2 md:px-8'>
       <div className="md:py-20 py-10 px-4  md:px-16">
         <AnimateToView className=" w-full">
-          <h1 className="md:text-[30px] text-[30px] px-2 md:px-0 text-DG">We handle everything for you.</h1>
+          <h1 className="md:text-[30px]  text-[30px]  text-DG">We handle everything for you.</h1>
         </AnimateToView>
         <div className="flex mt-5">
           <div>
             <AnimateToView className=" w-full">
-              <p className="text-DG ml-8 text-lg md:text-xl font-light">
+              <p className="text-DG ml-0 md:ml-8 text-lg md:text-xl font-light">
                 <strong className="font-semibold">Solve Agri Pak:</strong>{" "}
                 Empowering livestock success through proven solutions and community
                 development. We assist farmers in optimizing productivity and

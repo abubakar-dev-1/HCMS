@@ -124,19 +124,19 @@ const Hero = () => {
             }}
             transition={{ duration: 1 }}
           >
-            <div className="flex px-4 gap-[20px] flex-col w-full md:mt-20 justify-center items-start">
-              <p className="text-white text-[36px]">
-                <strong className="text-[#A8CF45] text-[36px]">SOLVE</strong> -
+            <div className="flex px-2 md:px-4 gap-[20px] flex-col w-full mt-20 justify-center items-start">
+              <p className="text-white text-[16px] md:text-[36px]">
+                <strong className="text-[#A8CF45] w-full">SOLVE</strong> -
                 Solutions for Livestock <br /> Value-added Enterprises
               </p>
-              <p className="text-white w-[60%]">
+              <p className="text-white md:w-[60%] w-full">
                 Lorem ipsum dolor sit amet consectetur adipisicing elit.
                 Adipisci doloremque tempora quae, laborum sunt quam rerum magnam
                 itaque impedit dolorem!
               </p>
 
               <a href="/projects">
-                <button className="bg-LG text-white py-2 px-3 text-lg rounded-lg">
+                <button className="bg-LG text-white py-2 px-2 md:mb-0 mb-2 md:px-3 text-[13px] md:text-lg rounded-lg">
                   Explore More
                 </button>
               </a>
