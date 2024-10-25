@@ -146,7 +146,7 @@ export default function ServicePage() {
                     service?.serviceImage?.alternativeText ||
                     service?.heroHeadings
                   }
-                  className="hidden lg:block w-full"
+                  className="hidden lg:block w-full md:-[50%]"
                   onError={(e) => {
                     console.error(
                       "Image failed to load:",
@@ -167,7 +167,7 @@ export default function ServicePage() {
 
             <div className="flex  flex-col md:flex-row justify-start md:justify-around md:items-center items-start md:px-0 px-3">
 
-              <div className="md:mt-0 mt-2">
+              <div className="md:mt-0 mt-2 md:w-[50%] w-full">
               {advertisement ? (
                 <BlocksRenderer content={advertisement} />
               ) : (
