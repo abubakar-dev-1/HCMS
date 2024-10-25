@@ -1,10 +1,10 @@
-'use client';
-import { useState, useEffect } from 'react';
-import Link from 'next/link';
-import AnimateToView from '../AnimateToView';
-import { Product } from '@/types/all-types'; // Assuming this is your Product type
-import qs from 'qs';
-import { useRouter } from 'next/navigation';
+"use client";
+import { useState, useEffect } from "react";
+import Link from "next/link";
+import AnimateToView from "../AnimateToView";
+import { Product } from "@/types/all-types"; // Assuming this is your Product type
+import qs from "qs";
+import { useRouter } from "next/navigation";
 
 const ProductCat = () => {
   const [categories, setCategories] = useState<Product[]>([]);
@@ -16,13 +16,14 @@ const ProductCat = () => {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const baseUrl = process.env.NEXT_PUBLIC_BASE_URL ?? 'http://localhost:1337';
-        const path = '/api/products';
+        const baseUrl =
+          process.env.NEXT_PUBLIC_BASE_URL ?? "http://localhost:1337";
+        const path = "/api/products";
 
         const query = qs.stringify({
           populate: {
             productImage: {
-              fields: ['url', 'alternativeText'], // Fetch the product image URL and alt text
+              fields: ["url", "alternativeText"], // Fetch the product image URL and alt text
             },
           },
         });
@@ -31,13 +32,13 @@ const ProductCat = () => {
         const response = await fetch(url);
 
         if (!response.ok) {
-          throw new Error('Failed to fetch products');
+          throw new Error("Failed to fetch products");
         }
 
         const data = await response.json();
 
         if (!Array.isArray(data.data)) {
-          throw new Error('Unexpected API response structure');
+          throw new Error("Unexpected API response structure");
         }
 
         setCategories(data.data);
@@ -95,13 +96,29 @@ const ProductCat = () => {
                     {/* Image Section */}
                     <img
                       onClick={() =>
-                        router.push(`/product/category/${product.productCategory}`)
+                        router.push(
+                          `/product/category/${product.productCategory}`
+                        )
                       }
                       className="w-full h-48 rounded-lg overflow-hidden object-cover hover:scale-110 transition-transform duration-300"
-                      src={`${process.env.NEXT_PUBLIC_BASE_URL}${product.productImage?.url}`}
-                      alt={
-                        product.productImage?.alternativeText || product.productTitle
+                      src={
+                        product.productImage?.url?.startsWith("http")
+                          ? product.productImage.url
+                          : `${process.env.NEXT_PUBLIC_BASE_URL}${
+                              product.productImage?.url || "/default-image.jpg"
+                            }`
                       }
+                      alt={
+                        product.productImage?.alternativeText ||
+                        product.productTitle
+                      }
+                      onError={(e) => {
+                        console.error(
+                          `Image failed to load: ${product.productImage?.url}`,
+                          e
+                        );
+                        e.currentTarget.src = "/default-image.jpg"; // Set fallback image on error
+                      }}
                     />
 
                     {/* Divider Line */}
