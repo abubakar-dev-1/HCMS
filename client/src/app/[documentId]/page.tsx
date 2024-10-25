@@ -137,17 +137,17 @@ export default function ServicePage() {
               </div>
             </div>
             <div className="w-full lg:w-1/2 flex flex-col gap-6">
-              <p className="text-lg text-gray-700">
-                {service?.content || "No content available at the moment."}
+              <p className="text-lg w-[30%] text-gray-700">
+                {service?.content || ""}
               </p>
 
               <p className="text-lg text-gray-700">
                 {service?.advertisement ||
-                  "Advertisement details not available."}
+                  ""}
               </p>
 
               <p className="text-lg text-gray-700">
-                {service?.about || "About information not provided."}
+                {service?.about || ""}
               </p>
             </div>
 
