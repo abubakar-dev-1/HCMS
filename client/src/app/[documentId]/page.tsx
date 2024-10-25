@@ -1,12 +1,14 @@
-'use client'
+"use client";
+
 import { useEffect, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
-import { ServiceData } from "@/types/all-types";
+import { ServiceData } from "@/types/all-types"; // Ensure this path is correct
 import qs from "qs";
 import Navbar from "@/components/navbar";
 import ReactMarkdown from "react-markdown";
 import { BlocksRenderer, type BlocksContent } from "@strapi/blocks-react-renderer";
 
+// Dynamic services data interface
 interface ServicesDataType {
   [key: string]: ServiceData;
 }
@@ -21,7 +23,7 @@ export default function ServicePage() {
   const [service, setService] = useState<ServiceData | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [services, setServices] = useState<ServiceData[]>([]);
-  const [content, setContent] = useState<BlocksContent | null>(null); // Adjusted type
+  const [content, setContent] = useState<BlocksContent | null>(null);
 
   useEffect(() => {
     if (serviceId) {
@@ -30,6 +32,7 @@ export default function ServicePage() {
     fetchAllServices();
   }, [serviceId]);
 
+  // Fetch a specific service by ID
   async function fetchServices(id: string) {
     try {
       const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
@@ -48,10 +51,10 @@ export default function ServicePage() {
       if (!res.ok) throw new Error(`Failed to fetch service with id ${id}.`);
 
       const data = await res.json();
-      setService(data.data);
+      const serviceData = data?.data || null;
 
-      const content: BlocksContent | null = data.data.attributes.serviceContent || null;
-      setContent(content);
+      setService(serviceData);
+      setContent(serviceData?.serviceContent || null); // Extract and set serviceContent
     } catch (error: any) {
       console.error("Error fetching service:", error);
       setError(
@@ -60,6 +63,7 @@ export default function ServicePage() {
     }
   }
 
+  // Fetch all services
   async function fetchAllServices() {
     try {
       const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
@@ -74,7 +78,7 @@ export default function ServicePage() {
       if (!res.ok) throw new Error(`Failed to fetch services.`);
 
       const data = await res.json();
-      setServices(data.data);
+      setServices(data.data || []);
     } catch (error: any) {
       console.error("Error fetching services:", error);
       setError(error.message || "An error occurred while fetching services.");
@@ -100,15 +104,10 @@ export default function ServicePage() {
                     ? service.heroImage.url
                     : `${process.env.NEXT_PUBLIC_BASE_URL}${service?.heroImage?.url}`
                 }
-                alt={
-                  service?.heroImage?.alternativeText || service?.heroHeadings
-                }
+                alt={service?.heroImage?.alternativeText || service?.heroHeadings}
                 className="object-cover w-full h-full"
                 onError={(e) => {
-                  console.error(
-                    "Image failed to load:",
-                    service?.heroImage?.url
-                  );
+                  console.error("Image failed to load:", service?.heroImage?.url);
                   e.currentTarget.src = "/fallback-image.jpg";
                 }}
               />
@@ -123,19 +122,13 @@ export default function ServicePage() {
                 <img
                   src={
                     service?.serviceImage?.url?.startsWith("http")
-                      ? service?.serviceImage.url
+                      ? service.serviceImage.url
                       : `${process.env.NEXT_PUBLIC_BASE_URL}${service?.serviceImage?.url}`
                   }
-                  alt={
-                    service?.serviceImage?.alternativeText ||
-                    service?.heroHeadings
-                  }
+                  alt={service?.serviceImage?.alternativeText || service?.heroHeadings}
                   className="hidden lg:block w-[50%]"
                   onError={(e) => {
-                    console.error(
-                      "Image failed to load:",
-                      service?.serviceImage?.url
-                    );
+                    console.error("Image failed to load:", service?.serviceImage?.url);
                     e.currentTarget.src = "/fallback-image.jpg";
                   }}
                 />
@@ -149,9 +142,11 @@ export default function ServicePage() {
               ) : (
                 <p>No content available</p>
               )}
+
               <ReactMarkdown>
                 {service?.advertisement || "Advertisement details not available"}
               </ReactMarkdown>
+
               <ReactMarkdown>
                 {service?.about || "About information not provided"}
               </ReactMarkdown>
