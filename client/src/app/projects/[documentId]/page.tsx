@@ -1,15 +1,17 @@
-'use client';
+"use client";
 
 import { useEffect, useState } from "react";
-import { useParams } from "next/navigation"; 
+import { useParams } from "next/navigation";
 import { toast } from "react-hot-toast";
 import { Project } from "@/types/all-types";
-import qs from 'qs'; 
+import qs from "qs";
 import Navbar from "@/components/navbar";
 
 export default function ProjectPage() {
   const params = useParams();
-  const projId = Array.isArray(params?.documentId) ? params.documentId[0] : params?.documentId;
+  const projId = Array.isArray(params?.documentId)
+    ? params.documentId[0]
+    : params?.documentId;
   const [project, setProject] = useState<Project | null>(null);
 
   useEffect(() => {
@@ -43,7 +45,9 @@ export default function ProjectPage() {
 
   const imageUrl = project.projImage?.url?.startsWith("http")
     ? project.projImage.url
-    : `${process.env.NEXT_PUBLIC_BASE_URL}${project.projImage?.url || "/default-image.jpg"}`;
+    : `${process.env.NEXT_PUBLIC_BASE_URL}${
+        project.projImage?.url || "/default-image.jpg"
+      }`;
 
   return (
     <>
@@ -69,8 +73,10 @@ export default function ProjectPage() {
             }}
           />
         </div>
-
-        <section className="prose w-[30%] flex flex-wrap" dangerouslySetInnerHTML={{ __html: project.html }} />
+        <section
+          className=" w-full flex flex-wrap"
+          dangerouslySetInnerHTML={{ __html: project.html }}
+        />
       </main>
     </>
   );
