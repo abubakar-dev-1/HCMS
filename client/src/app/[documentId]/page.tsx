@@ -155,19 +155,19 @@ export default function ServicePage() {
                     e.currentTarget.src = "/fallback-image.jpg"; // Optional fallback image
                   }}
                 />
-              </div>
-              <div className="w-[50%]">
+              <div className="w-full md:w-[50%]">
               {about ? (
                 <BlocksRenderer content={about} />
               ) : (
                 <p>No content available</p>
               )}
               </div>
+              </div>
             </div>
 
             <div className="flex  flex-col md:flex-row justify-start md:justify-around md:items-center items-start md:px-0 px-3">
 
-              <div>
+              <div className="md:w-[50%] w-full">
               {advertisement ? (
                 <BlocksRenderer content={advertisement} />
               ) : (
@@ -177,7 +177,7 @@ export default function ServicePage() {
 
              
 
-              <div className="">
+              <div className="md:w-[50%] w-full">
                 {/* Render the content with BlocksRenderer */}
                 {content ? (
                   <BlocksRenderer content={content} />
@@ -234,7 +234,7 @@ export default function ServicePage() {
                 alt={
                   service?.ctaImage?.alternativeText || service?.heroHeadings
                 }
-                className="object-cover w-[90%] h-[80%] opacity-90 shadow-black shadow-2xl"
+                className="object-cover w-[90%] h-[80%] opacity-90 shadow-black md:shadow-2xl shadow-md"
                 onError={(e) => {
                   console.error(
                     "Image failed to load:",
