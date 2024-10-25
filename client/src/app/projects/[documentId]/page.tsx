@@ -6,7 +6,6 @@ import { toast } from "react-hot-toast";
 import { Project } from "@/types/all-types";
 import qs from "qs";
 import Navbar from "@/components/navbar";
-import ReactMarkdown from "react-markdown";
 
 export default function ProjectPage() {
   const params = useParams();
@@ -14,7 +13,7 @@ export default function ProjectPage() {
     ? params.documentId[0]
     : params?.documentId;
   const [project, setProject] = useState<Project | null>(null);
-  const [description, setDescription] = useState<any | null>(null); // Adjusted type to `any` to handle multiple formats
+  const [description, setDescription] = useState<any | null>(null); // Adjust to handle any data
 
   useEffect(() => {
     if (projId) fetchProject(projId);
@@ -39,7 +38,7 @@ export default function ProjectPage() {
       console.log("Fetched project data:", data); // Log to see data structure
 
       setProject(data.data);
-      setDescription(data.data.projDescription || null); // Store the description content
+      setDescription(data.data.projDescription || null);
     } catch (error) {
       console.error("Error fetching the project:", error);
       toast.error("Error fetching the project.");
@@ -79,39 +78,40 @@ export default function ProjectPage() {
           />
         </div>
 
-        {/* Render description based on its structure */}
         <div className="prose prose-lg text-gray-700 w-full">
-          {renderDescription(description)}
+          {description ? renderDescription(description) : <p>No content available.</p>}
         </div>
       </main>
     </>
   );
 }
 
-/* Helper function to render the description */
-function renderDescription(description: any) {
-  if (!description) return <p>No description available.</p>;
+/* Helper function to render the nested description content */
+function renderDescription(blocks: any[]) {
+  return blocks.map((block, index) => {
+    switch (block.type) {
+      case "paragraph":
+        return (
+          <p key={index}>
+            {block.children.map((child: any, childIndex: number) => (
+              <span key={childIndex} style={{ fontWeight: child.bold ? "bold" : "normal" }}>
+                {child.text}
+              </span>
+            ))}
+          </p>
+        );
 
-  if (typeof description === "string") {
-    // If it's an HTML string, use dangerouslySetInnerHTML
-    return (
-      <div
-        dangerouslySetInnerHTML={{ __html: description }}
-      ></div>
-    );
-  } else if (Array.isArray(description)) {
-    // If it's an array of blocks, map over them
-    return description.map((block, index) => (
-      <div key={index}>
-        <p>{block.content || block.text}</p>
-      </div>
-    ));
-  } else if (description.markdown) {
-    // If the content is Markdown
-    return <ReactMarkdown>{description.markdown}</ReactMarkdown>;
-  } else {
-    // Fallback if content is in another unexpected format
-    console.warn("Unexpected description format:", description);
-    return <p>Unable to render description.</p>;
-  }
+      case "list":
+        return (
+          <ul key={index} className="list-disc list-inside">
+            {block.children.map((listItem: any, listItemIndex: number) => (
+              <li key={listItemIndex}>{listItem.children[0]?.text}</li>
+            ))}
+          </ul>
+        );
+
+      default:
+        return <p key={index}>Unsupported block type: {block.type}</p>;
+    }
+  });
 }
