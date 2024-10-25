@@ -157,9 +157,11 @@ export default function ServicePage() {
                 />
               </div>
 
-              <ReactMarkdown>
-                {service?.about || "About information not provided"}
-              </ReactMarkdown>
+              {about ? (
+                <BlocksRenderer content={about} />
+              ) : (
+                <p>No content available</p>
+              )}
             </div>
 
             <div className="flex  flex-col md:flex-row justify-start md:justify-around md:items-center items-start md:px-0 px-3">
@@ -169,11 +171,7 @@ export default function ServicePage() {
                 <p>No content available</p>
               )}
 
-              {about ? (
-                <BlocksRenderer content={about} />
-              ) : (
-                <p>No content available</p>
-              )}
+             
 
               <div className="w-1/2">
                 {/* Render the content with BlocksRenderer */}
