@@ -5,10 +5,6 @@ import { useParams } from "next/navigation";
 import { toast } from "react-hot-toast";
 import { Project } from "@/types/all-types";
 import qs from "qs";
-import {
-  BlocksRenderer,
-  type BlocksContent,
-} from "@strapi/blocks-react-renderer";
 import Navbar from "@/components/navbar";
 import ReactMarkdown from "react-markdown";
 
@@ -18,7 +14,7 @@ export default function ProjectPage() {
     ? params.documentId[0]
     : params?.documentId;
   const [project, setProject] = useState<Project | null>(null);
-  const [description, setDescription] = useState<BlocksContent | null>(null);
+  const [description, setDescription] = useState<any | null>(null); // Adjusted type to `any` to handle multiple formats
 
   useEffect(() => {
     if (projId) fetchProject(projId);
@@ -40,10 +36,10 @@ export default function ProjectPage() {
       if (!res.ok) throw new Error("Failed to fetch project");
 
       const data = await res.json();
-      setProject(data.data);
+      console.log("Fetched project data:", data); // Log to see data structure
 
-      const description: BlocksContent = data.data.projDescription || null;
-      setDescription(description);
+      setProject(data.data);
+      setDescription(data.data.projDescription || null); // Store the description content
     } catch (error) {
       console.error("Error fetching the project:", error);
       toast.error("Error fetching the project.");
@@ -82,11 +78,40 @@ export default function ProjectPage() {
             }}
           />
         </div>
-        <div
-          className="prose prose-headings:font-semibold prose-strong:text-black prose-a:text-blue-600 hover:prose-a:underline"
-          dangerouslySetInnerHTML={{ __html: description || "" }}
-        ></div>
+
+        {/* Render description based on its structure */}
+        <div className="prose prose-lg text-gray-700 w-full">
+          {renderDescription(description)}
+        </div>
       </main>
     </>
   );
+}
+
+/* Helper function to render the description */
+function renderDescription(description: any) {
+  if (!description) return <p>No description available.</p>;
+
+  if (typeof description === "string") {
+    // If it's an HTML string, use dangerouslySetInnerHTML
+    return (
+      <div
+        dangerouslySetInnerHTML={{ __html: description }}
+      ></div>
+    );
+  } else if (Array.isArray(description)) {
+    // If it's an array of blocks, map over them
+    return description.map((block, index) => (
+      <div key={index}>
+        <p>{block.content || block.text}</p>
+      </div>
+    ));
+  } else if (description.markdown) {
+    // If the content is Markdown
+    return <ReactMarkdown>{description.markdown}</ReactMarkdown>;
+  } else {
+    // Fallback if content is in another unexpected format
+    console.warn("Unexpected description format:", description);
+    return <p>Unable to render description.</p>;
+  }
 }
