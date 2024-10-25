@@ -10,6 +10,7 @@ import {
   type BlocksContent,
 } from "@strapi/blocks-react-renderer";
 import Navbar from "@/components/navbar";
+import ReactMarkdown from "react-markdown";
 
 export default function ProjectPage() {
   const params = useParams();
@@ -43,7 +44,6 @@ export default function ProjectPage() {
 
       const description: BlocksContent = data.data.projDescription || null;
       setDescription(description);
-
     } catch (error) {
       console.error("Error fetching the project:", error);
       toast.error("Error fetching the project.");
@@ -82,14 +82,10 @@ export default function ProjectPage() {
             }}
           />
         </div>
-            <div className="w-full flex flex-wrap">
-          {description ? (
-                <BlocksRenderer content={description} />
-              ) : (
-                <p></p>
-              )}
-              </div>
-        
+        <div
+          className="prose prose-headings:font-semibold prose-strong:text-black prose-a:text-blue-600 hover:prose-a:underline"
+          dangerouslySetInnerHTML={{ __html: description || "" }}
+        ></div>
       </main>
     </>
   );
