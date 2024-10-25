@@ -50,7 +50,7 @@ export default function ServicePage() {
       const data = await res.json();
       setService(data.data);
 
-      const content: BlocksContent | null = data.data.attributes.content || null;
+      const content: BlocksContent | null = data.data.attributes.serviceContent || null;
       setContent(content);
     } catch (error: any) {
       console.error("Error fetching service:", error);
