@@ -146,7 +146,7 @@ export default function ServicePage() {
                     service?.serviceImage?.alternativeText ||
                     service?.heroHeadings
                   }
-                  className="hidden lg:block"
+                  className="hidden lg:block w-full"
                   onError={(e) => {
                     console.error(
                       "Image failed to load:",
@@ -156,24 +156,28 @@ export default function ServicePage() {
                   }}
                 />
               </div>
-
+              <div className="w-[50%]">
               {about ? (
                 <BlocksRenderer content={about} />
               ) : (
                 <p>No content available</p>
               )}
+              </div>
             </div>
 
             <div className="flex  flex-col md:flex-row justify-start md:justify-around md:items-center items-start md:px-0 px-3">
+
+              <div>
               {advertisement ? (
                 <BlocksRenderer content={advertisement} />
               ) : (
                 <p>No content available</p>
               )}
+              </div>
 
              
 
-              <div className="w-1/2">
+              <div className="">
                 {/* Render the content with BlocksRenderer */}
                 {content ? (
                   <BlocksRenderer content={content} />
@@ -239,14 +243,14 @@ export default function ServicePage() {
                   e.currentTarget.src = "/fallback-image.jpg"; // Optional fallback image
                 }}
               />
-              <h1 className="absolute top-[50%] left-1/2 -translate-x-1/2 text-lg md:text-3xl text-white font-semibold">
+              <h1 className="absolute top-[30%] md:top-[50%] w-[50%] md:w-full left-[54%] text-center lg:left-1/2 -translate-x-1/2 text-lg md:text-3xl text-white font-semibold">
                 {service?.ctaText}
               </h1>
-              <p className="absolute top-[60%] left-[76%] w-full -translate-x-1/2 text-white font-semibold text-[16px] md:text-[22px]">
+              <p className="absolute top-[50%] md:top-[60%] left-[50%] md:left-[76%] w-[80%] md:w-full -translate-x-1/2 text-white text-center font-semibold text-[14px] lg:text-[22px] flex flex-wrap">
                 {service?.ctaPara}
               </p>
               <a href="/contactus">
-                <button className="absolute top-[78%] left-[50%] bg-LG p-2 rounded-md">
+                <button className="absolute top-[78%] left-[39%] md:left-[50%] bg-LG p-2 rounded-md">
                   Get Started
                 </button>
               </a>
