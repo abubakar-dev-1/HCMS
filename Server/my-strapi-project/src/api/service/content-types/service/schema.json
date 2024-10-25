@@ -40,9 +40,6 @@
     "heroHeadings": {
       "type": "string"
     },
-    "content": {
-      "type": "string"
-    },
     "advertisement": {
       "type": "string"
     },
@@ -65,6 +62,9 @@
     },
     "ctaPara": {
       "type": "text"
+    },
+    "serviceContent": {
+      "type": "blocks"
     }
   }
 }

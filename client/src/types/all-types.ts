@@ -83,7 +83,7 @@ interface Product {
         alternativeText: string;
         url: string;
       };
-    content: string;
+    serviceContent: string;
     advertisement: string;
     about: string;
   };
