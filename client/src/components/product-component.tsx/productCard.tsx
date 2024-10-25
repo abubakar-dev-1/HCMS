@@ -3,9 +3,9 @@ import { Product } from "@/types/all-types";
 import { AiFillStar, AiOutlineStar } from "react-icons/ai"; // Star icons
 
 export default function ProductCard({ product }: { product: Product }) {
-  const imageUrl = `${
-    process.env.NEXT_PUBLIC_BASE_URL
-  }${product.productImage?.url || "/default-image.jpg"}`; // Adjusted for Strapi image URL
+  const imageUrl = product.productImage?.url?.startsWith("http")
+    ? product.productImage.url
+    : `${process.env.NEXT_PUBLIC_BASE_URL}${product.productImage?.url || "/default-image.jpg"}`;
 
   // Simulating a random rating between 1 and 5 (since Strapi doesn’t provide it)
   const rating = Math.floor(Math.random() * 5) + 1;
@@ -16,13 +16,16 @@ export default function ProductCard({ product }: { product: Product }) {
       className="w-[270px] bg-white rounded-lg shadow-md p-9 hover:shadow-lg transition-shadow duration-300 cursor-pointer"
     >
       {/* Image Section */}
-      <div className="relative w-full  h-auto rounded-lg overflow-hidden">
+      <div className="relative w-full h-auto rounded-lg overflow-hidden">
         <img
           src={imageUrl}
           alt={product.productTitle}
           className="w-full h-full object-contain object-center transition-transform duration-300 hover:scale-105"
+          onError={(e) => {
+            console.error(`Image failed to load: ${imageUrl}`, e);
+            e.currentTarget.src = "/default-image.jpg"; // Fallback image
+          }}
         />
-        {/* Sale Label Example */}
         {product.isOnSale && (
           <span className="absolute top-2 left-2 bg-red-500 text-white text-xs px-2 py-1 rounded-md">
             SALE!
@@ -50,7 +53,9 @@ export default function ProductCard({ product }: { product: Product }) {
               )
             )}
           </div>
-          <p className="text-red-500 font-semibold">${product.productPrice}</p>
+          <p className="text-red-500 font-semibold">
+            ${product.productPrice}
+          </p>
         </div>
 
         {/* SKU Information */}
