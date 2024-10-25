@@ -87,9 +87,22 @@ export default function ServicePage() {
           <>
             <div className="h-screen flex items-center justify-center relative w-full overflow-hidden">
               <img
-                src={`${process.env.NEXT_PUBLIC_BASE_URL}${service?.heroImage?.url}`}
-                alt={service?.heroImage?.alternativeText || service?.heroHeadings}
+                 src={
+                  service?.heroImage?.url?.startsWith("http")
+                    ? service.heroImage.url
+                    : `${process.env.NEXT_PUBLIC_BASE_URL}${service?.heroImage?.url}`
+                }
+                alt={
+                  service?.heroImage?.alternativeText || service?.heroHeadings
+                }
                 className="object-cover w-full h-full"
+                onError={(e) => {
+                  console.error(
+                    "Image failed to load:",
+                    service?.heroImage?.url
+                  );
+                  e.currentTarget.src = "/fallback-image.jpg"; // Optional fallback image
+                }}
               />
               <h1 className="absolute top-[50%] left-1/2 -translate-x-1/2 text-2xl md:text-5xl text-white font-semibold tracking-wide">
                 {service?.heroHeadings}
@@ -99,9 +112,24 @@ export default function ServicePage() {
             <div className="px-4 md:px-20 xl:px-40 w-full flex flex-col gap-20">
               <div className="w-full flex gap-20">
                 <img
-                  src={`${process.env.NEXT_PUBLIC_BASE_URL}${service?.serviceImage?.url}`}
-                  alt={service?.serviceImage?.alternativeText || service?.heroHeadings}
-                  className="hidden lg:block w-[50%]"
+                src={
+                  service?.serviceImage?.url?.startsWith("http")
+                    ? service?.serviceImage.url
+                    : `${process.env.NEXT_PUBLIC_BASE_URL}${service?.serviceImage?.url}`
+                }
+                alt={
+                  service?.serviceImage?.alternativeText || service?.heroHeadings
+                }
+                className="hidden lg:block w-[50%]"
+                onError={(e) => {
+                  console.error(
+                    "Image failed to load:",
+                    service?.serviceImage?.url
+                  );
+                  e.currentTarget.src = "/fallback-image.jpg"; // Optional fallback image
+                }}
+                  
+                  
                 />
                 <div className="flex flex-col items-center justify-center gap-8">
                   <section dangerouslySetInnerHTML={{ __html: service?.content || "" }} />
@@ -121,9 +149,23 @@ export default function ServicePage() {
                     onClick={() => router.push(`/${service.documentId}`)}
                   >
                     <img
-                      src={`${process.env.NEXT_PUBLIC_BASE_URL}${service.serviceImage?.url}`}
-                      alt={service.serviceImage?.alternativeText || service.name}
+                      src={
+                        service?.serviceImage?.url?.startsWith("http")
+                          ? service?.serviceImage.url
+                          : `${process.env.NEXT_PUBLIC_BASE_URL}${service?.serviceImage?.url}`
+                      }
+                      alt={
+                        service?.serviceImage?.alternativeText || service?.heroHeadings
+                      }
                       className="w-full h-40 object-cover rounded-t-md"
+                      onError={(e) => {
+                        console.error(
+                          "Image failed to load:",
+                          service?.serviceImage?.url
+                        );
+                        e.currentTarget.src = "/fallback-image.jpg"; // Optional fallback image
+                      }}
+                      
                     />
                     <h3 className="text-lg text-center font-semibold mt-4 mb-4">
                       {service.name}
@@ -135,9 +177,23 @@ export default function ServicePage() {
 
             <div className="h-screen flex items-center justify-center relative w-full overflow-hidden">
               <img
-                src={`${process.env.NEXT_PUBLIC_BASE_URL}${service?.ctaImage?.url}`}
-                alt={service?.ctaImage?.alternativeText || service?.ctaText}
-                className="object-cover w-[90%] h-[80%]"
+              src={
+                service?.ctaImage?.url?.startsWith("http")
+                  ? service?.ctaImage.url
+                  : `${process.env.NEXT_PUBLIC_BASE_URL}${service?.ctaImage?.url}`
+              }
+              alt={
+                service?.ctaImage?.alternativeText || service?.heroHeadings
+              }
+              className="object-cover w-[90%] h-[80%]"
+              onError={(e) => {
+                console.error(
+                  "Image failed to load:",
+                  service?.ctaImage?.url
+                );
+                e.currentTarget.src = "/fallback-image.jpg"; // Optional fallback image
+              }}
+                
               />
               <h1 className="absolute top-[50%] left-1/2 -translate-x-1/2 text-2xl md:text-5xl text-white font-semibold">
                 {service?.ctaText}
