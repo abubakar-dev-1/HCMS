@@ -639,9 +639,9 @@ export interface ApiServiceService extends Struct.CollectionTypeSchema {
     >;
     heroImage: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
     heroHeadings: Schema.Attribute.String;
-    content: Schema.Attribute.Text;
-    advertisement: Schema.Attribute.Text;
-    about: Schema.Attribute.Text;
+    content: Schema.Attribute.String;
+    advertisement: Schema.Attribute.String;
+    about: Schema.Attribute.String;
     ctaImage: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
     ctaText: Schema.Attribute.String;
     ctaPara: Schema.Attribute.Text;

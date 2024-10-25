@@ -138,16 +138,16 @@ export default function ServicePage() {
             </div>
             <div className="w-full lg:w-1/2 flex flex-col gap-6">
               <p className="text-lg w-[30%] text-gray-700">
-                {service?.content || ""}
+                {service?.content.toString() || ""}
               </p>
 
               <p className="text-lg text-gray-700">
-                {service?.advertisement ||
+                {service?.advertisement.toString() ||
                   ""}
               </p>
 
               <p className="text-lg text-gray-700">
-                {service?.about || ""}
+                {service?.about.toString() || ""}
               </p>
             </div>
 

@@ -41,13 +41,13 @@
       "type": "string"
     },
     "content": {
-      "type": "text"
+      "type": "string"
     },
     "advertisement": {
-      "type": "text"
+      "type": "string"
     },
     "about": {
-      "type": "text"
+      "type": "string"
     },
     "ctaImage": {
       "type": "media",
