@@ -365,7 +365,7 @@ const MobileNav = ({ navLinks }: { navLinks: LinkWithChildren[] }) => {
               </motion.nav>
             </div>
             <Link href="/" onClick={onBeforeNavigate} className="min-w-max self-center mt-8 grayscale">
-              <img src="/logo.png" alt="logo" className="h-24" />
+              <img src="/logo.png" alt="logo" className="h-12" />
             </Link>
           </motion.div>
         )}
