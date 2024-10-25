@@ -107,7 +107,7 @@ function renderDescription(blocks: any[]) {
 
       case "list":
         return (
-          <ul key={index} className="list-disc list-inside mb-4">
+          <ul key={index} className="">
             {block.children.map((listItem: any, listItemIndex: number) => (
               <li key={listItemIndex}>
                 {renderChildren(listItem.children)}
