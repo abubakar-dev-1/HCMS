@@ -93,29 +93,15 @@ function renderDescription(blocks: any[]) {
       case "paragraph":
         return (
           <p key={index} className="mb-4">
-            {block.children.map((child: any, childIndex: number) => (
-              <span
-                key={childIndex}
-                style={{ fontWeight: child.bold ? "bold" : "normal" }}
-              >
-                {child.text}
-              </span>
-            ))}
+            {renderChildren(block.children)}
           </p>
         );
 
       case "heading":
-        const HeadingTag = (`h${block.level || 2}` as keyof JSX.IntrinsicElements); // Dynamically assign heading level
+        const HeadingTag = (`h${block.level || 2}` as keyof JSX.IntrinsicElements); // Dynamically set heading level
         return (
           <HeadingTag key={index} className="mt-6 mb-2 font-semibold">
-            {block.children.map((child: any, childIndex: number) => (
-              <span
-                key={childIndex}
-                style={{ fontWeight: child.bold ? "bold" : "normal" }}
-              >
-                {child.text}
-              </span>
-            ))}
+            {renderChildren(block.children)}
           </HeadingTag>
         );
 
@@ -124,9 +110,7 @@ function renderDescription(blocks: any[]) {
           <ul key={index} className="list-disc list-inside mb-4">
             {block.children.map((listItem: any, listItemIndex: number) => (
               <li key={listItemIndex}>
-                {listItem.children.map((child: any, childIndex: number) => (
-                  <span key={childIndex}>{child.text}</span>
-                ))}
+                {renderChildren(listItem.children)}
               </li>
             ))}
           </ul>
@@ -136,5 +120,17 @@ function renderDescription(blocks: any[]) {
         return <p key={index}>Unsupported block type: {block.type}</p>;
     }
   });
+}
+
+/* Helper function to render children elements */
+function renderChildren(children: any[]) {
+  return children.map((child, childIndex) => (
+    <span
+      key={childIndex}
+      style={{ fontWeight: child.bold ? "bold" : "normal" }}
+    >
+      {child.text}
+    </span>
+  ));
 }
 
