@@ -6,7 +6,12 @@ const nextConfig = {
         protocol: "http",
         hostname: "localhost",
         port: "1337",
-        pathname: "/uploads/**/*", // Make sure to match the correct path from Strapi
+        pathname: "/uploads/**/*",
+      },
+      {
+        protocol: "https",
+        hostname: "kind-victory-5324fb6493.strapiapp.com", // Replace with your actual Strapi domain
+        pathname: "/uploads/**/*",
       },
     ],
   },

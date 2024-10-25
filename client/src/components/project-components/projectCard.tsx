@@ -19,6 +19,7 @@ export default function ProjectCard({ project }: { project: Project }) {
   : `${process.env.NEXT_PUBLIC_BASE_URL}${project.projImage?.url || '/default-image.jpg'}`;
 
 
+
   return (
     <Link href={`/projects/${project.documentId}`} className="h-auto shadow-lg shadow-gray-400  relative overflow-hidden bg-LG ">
       <div className="h-[240px] overflow-hidden">
