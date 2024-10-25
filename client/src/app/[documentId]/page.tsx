@@ -9,6 +9,7 @@ import Link from "next/link";
 import ReactMarkdown from "react-markdown";
 import { BlocksRenderer, type BlocksContent } from "@strapi/blocks-react-renderer";
 
+// Dynamic services data interface
 interface ServicesDataType {
   [key: string]: ServiceData;
 }
@@ -52,8 +53,7 @@ export default function ServicePage() {
       const data = await res.json();
       setService(data.data);
 
-      const content: BlocksContent = data.data.serviceContent || null;
-      console.log(content); // Extracting serviceContent
+      const content: BlocksContent = data.data.serviceContent || null; // Extracting serviceContent
       setContent(content); // Storing in state
       console.log(data); // Keeping your console log
     } catch (error: any) {
@@ -143,22 +143,18 @@ export default function ServicePage() {
                 />
               </div>
             </div>
-            
-            {/* Styled Content Section */}
-            <div className="w-full lg:w-1/2 flex flex-col gap-6 p-6 bg-gray-50 rounded-lg shadow-md">
+            <div className="w-full lg:w-1/2 flex flex-col gap-6">
+              {/* Render the content with BlocksRenderer */}
               {content ? (
-                <div className="content-container  prose lg:prose-xl max-w-none">
-                  <BlocksRenderer content={content} />
-                </div>
+                <BlocksRenderer content={content} />
               ) : (
-                <p> No content available</p>
+                <p>No content available</p>
               )}
 
-              <ReactMarkdown className="prose prose-sm md:prose-lg">
+              <ReactMarkdown>
                 {service?.advertisement || "Advertisement details not available"}
               </ReactMarkdown>
-
-              <ReactMarkdown className="prose prose-sm md:prose-lg">
+              <ReactMarkdown>
                 {service?.about || "About information not provided"}
               </ReactMarkdown>
             </div>
@@ -200,6 +196,38 @@ export default function ServicePage() {
                 ))}
               </div>
             </section>
+
+            <div className="h-screen flex items-center justify-center relative w-full overflow-hidden">
+              <img
+                src={
+                  service?.ctaImage?.url?.startsWith("http")
+                    ? service?.ctaImage.url
+                    : `${process.env.NEXT_PUBLIC_BASE_URL}${service?.ctaImage?.url}`
+                }
+                alt={
+                  service?.ctaImage?.alternativeText || service?.heroHeadings
+                }
+                className="object-cover w-[90%] h-[80%]"
+                onError={(e) => {
+                  console.error(
+                    "Image failed to load:",
+                    service?.ctaImage?.url
+                  );
+                  e.currentTarget.src = "/fallback-image.jpg"; // Optional fallback image
+                }}
+              />
+              <h1 className="absolute top-[50%] left-1/2 -translate-x-1/2 text-2xl md:text-5xl text-white font-semibold">
+                {service?.ctaText}
+              </h1>
+              <p className="absolute top-[70%] left-1/2 -translate-x-1/2 text-white font-semibold">
+                {service?.ctaPara}
+              </p>
+              <a href="/contactus">
+                <button className="absolute top-[78%] left-[50%] bg-LG p-2 rounded-xl">
+                  Get Started
+                </button>
+              </a>
+            </div>
           </>
         )}
       </main>
