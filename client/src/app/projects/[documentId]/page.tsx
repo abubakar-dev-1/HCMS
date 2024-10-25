@@ -94,9 +94,9 @@ function renderDescription(blocks: any[]) {
         return (
           <p key={index}>
             {block.children.map((child: any, childIndex: number) => (
-              <span key={childIndex} style={{ fontWeight: child.bold ? "bold" : "normal" }}>
+              <p key={childIndex} style={{ fontWeight: child.bold ? "bold" : "normal" }}>
                 {child.text}
-              </span>
+              </p>
             ))}
           </p>
         );
