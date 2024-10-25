@@ -132,7 +132,7 @@ export default function ServicePage() {
                   
                 />
                 <div className="flex flex-col justify-start items-start w-[50%] md:items-center md:justify-center gap-8">
-                  <section dangerouslySetInnerHTML={{ __html: service?.content || "" }} />
+                  <section className="w-[30%]" dangerouslySetInnerHTML={{ __html: service?.content || "" }} />
                   <section dangerouslySetInnerHTML={{ __html: service?.advertisement || "" }} />
                   <section dangerouslySetInnerHTML={{ __html: service?.about || "" }} />
                 </div>
