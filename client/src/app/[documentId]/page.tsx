@@ -6,6 +6,7 @@ import { ServiceData } from "@/types/all-types"; // Ensure this path is correct
 import qs from "qs";
 import Navbar from "@/components/navbar";
 import Link from "next/link";
+import ReactMarkdown from "react-markdown";
 
 // Dynamic services data interface
 interface ServicesDataType {
@@ -137,18 +138,16 @@ export default function ServicePage() {
               </div>
             </div>
             <div className="w-full lg:w-1/2 flex flex-col gap-6">
-              <p className="text-lg w-[30%] text-gray-700">
-                {service?.content.toString() || ""}
-              </p>
-
-              <p className="text-lg text-gray-700">
-                {service?.advertisement.toString() ||
-                  ""}
-              </p>
-
-              <p className="text-lg text-gray-700">
-                {service?.about.toString() || ""}
-              </p>
+              <ReactMarkdown>
+                {service?.content || "No content available"}
+              </ReactMarkdown>
+              <ReactMarkdown>
+                {service?.advertisement ||
+                  "Advertisement details not available"}
+              </ReactMarkdown>
+              <ReactMarkdown>
+                {service?.about || "About information not provided"}
+              </ReactMarkdown>
             </div>
 
             <section className="mt-20">
