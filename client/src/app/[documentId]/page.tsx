@@ -155,6 +155,7 @@ export default function ServicePage() {
                     e.currentTarget.src = "/fallback-image.jpg"; // Optional fallback image
                   }}
                 />
+              </div>
               <div className="w-full md:w-[50%]">
               {about ? (
                 <BlocksRenderer content={about} />
@@ -162,12 +163,11 @@ export default function ServicePage() {
                 <p>No content available</p>
               )}
               </div>
-              </div>
             </div>
 
             <div className="flex  flex-col md:flex-row justify-start md:justify-around md:items-center items-start md:px-0 px-3">
 
-              <div className="md:mt-0 mt-2 md:w-[50%] w-full">
+              <div className="md:mt-0 mt-2 ">
               {advertisement ? (
                 <BlocksRenderer content={advertisement} />
               ) : (
@@ -177,7 +177,7 @@ export default function ServicePage() {
 
              
 
-              <div className="md:w-[50%] w-full md:mt-0 mt-7">
+              <div className=" md:mt-0 mt-7">
                 {/* Render the content with BlocksRenderer */}
                 {content ? (
                   <BlocksRenderer content={content} />
