@@ -84,8 +84,8 @@ interface Product {
         url: string;
       };
     serviceContent: string;
-    advertisement: string;
-    about: string;
+    serviceAd: string;
+    serviceAbout: string;
   };
   
   export type { Product, User, Comment, Project, PageInfo, ServiceData };

@@ -65,6 +65,12 @@
     },
     "serviceContent": {
       "type": "blocks"
+    },
+    "serviceAbout": {
+      "type": "blocks"
+    },
+    "serviceAd": {
+      "type": "blocks"
     }
   }
 }

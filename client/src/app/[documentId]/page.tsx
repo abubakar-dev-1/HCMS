@@ -27,7 +27,11 @@ export default function ServicePage() {
   const [service, setService] = useState<ServiceData | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [services, setServices] = useState<ServiceData[]>([]);
-  const [content, setContent] = useState<BlocksContent | null>(null); // Added content state
+  const [content, setContent] = useState<BlocksContent | null>(null);
+  const [about, setAbout] = useState<BlocksContent | null>(null);
+  const [advertisement, setAdvertisement] = useState<BlocksContent | null>(
+    null
+  ); // Added content state
 
   useEffect(() => {
     if (serviceId) {
@@ -56,8 +60,15 @@ export default function ServicePage() {
       const data = await res.json();
       setService(data.data);
 
-      const content: BlocksContent = data.data.serviceContent || null; // Extracting serviceContent
-      setContent(content); // Storing in state
+      const content: BlocksContent = data.data.serviceContent || null;
+      setContent(content);
+
+      const advertisement: BlocksContent = data.data.serviceAd || null; // Extracting serviceContent
+      setAdvertisement(advertisement);
+
+      const about: BlocksContent = data.data.serviceAbout || null; // Extracting serviceContent
+      setAbout(about);
+
       console.log(data); // Keeping your console log
     } catch (error: any) {
       console.error("Error fetching service:", error);
@@ -118,7 +129,7 @@ export default function ServicePage() {
                   e.currentTarget.src = "/fallback-image.jpg"; // Optional fallback image
                 }}
               />
-              <h1 className="absolute top-[50%] left-1/2 -translate-x-1/2 text-2xl md:text-5xl text-white font-semibold tracking-wide">
+              <h1 className="absolute top-[50%] w-full text-center left-1/2 -translate-x-1/2 text-2xl md:text-5xl text-white font-semibold tracking-wide">
                 {service?.heroHeadings}
               </h1>
             </div>
@@ -145,19 +156,26 @@ export default function ServicePage() {
                   }}
                 />
               </div>
-             
+
               <ReactMarkdown>
-                  {service?.about || "About information not provided"}
-                </ReactMarkdown>
+                {service?.about || "About information not provided"}
+              </ReactMarkdown>
             </div>
 
-              <div className="flex justify-around items-center">
-                <ReactMarkdown>
-                  {service?.advertisement ||
-                    "Advertisement details not available"}
-                </ReactMarkdown>
+            <div className="flex  flex-col md:flex-row justify-start md:justify-around md:items-center items-start md:px-0 px-3">
+              {advertisement ? (
+                <BlocksRenderer content={advertisement} />
+              ) : (
+                <p>No content available</p>
+              )}
 
-                <div className="w-1/2">
+              {about ? (
+                <BlocksRenderer content={about} />
+              ) : (
+                <p>No content available</p>
+              )}
+
+              <div className="w-1/2">
                 {/* Render the content with BlocksRenderer */}
                 {content ? (
                   <BlocksRenderer content={content} />
@@ -165,7 +183,7 @@ export default function ServicePage() {
                   <p>No content available</p>
                 )}
               </div>
-              </div>
+            </div>
             <section className="mt-20">
               <h2 className="text-center text-3xl font-bold mb-8">
                 Our Services
@@ -214,7 +232,7 @@ export default function ServicePage() {
                 alt={
                   service?.ctaImage?.alternativeText || service?.heroHeadings
                 }
-                className="object-cover w-[90%] h-[80%]"
+                className="object-cover w-[90%] h-[80%] opacity-90 shadow-black shadow-2xl"
                 onError={(e) => {
                   console.error(
                     "Image failed to load:",
@@ -223,14 +241,14 @@ export default function ServicePage() {
                   e.currentTarget.src = "/fallback-image.jpg"; // Optional fallback image
                 }}
               />
-              <h1 className="absolute top-[50%] left-1/2 -translate-x-1/2 text-2xl md:text-5xl text-white font-semibold">
+              <h1 className="absolute top-[50%] left-1/2 -translate-x-1/2 text-lg md:text-3xl text-white font-semibold">
                 {service?.ctaText}
               </h1>
-              <p className="absolute top-[70%] left-1/2 -translate-x-1/2 text-white font-semibold">
+              <p className="absolute top-[60%] left-[76%] w-full -translate-x-1/2 text-white font-semibold text-[16px] md:text-[22px]">
                 {service?.ctaPara}
               </p>
               <a href="/contactus">
-                <button className="absolute top-[78%] left-[50%] bg-LG p-2 rounded-xl">
+                <button className="absolute top-[78%] left-[50%] bg-LG p-2 rounded-md">
                   Get Started
                 </button>
               </a>

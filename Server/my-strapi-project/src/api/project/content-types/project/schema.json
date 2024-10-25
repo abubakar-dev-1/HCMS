@@ -40,6 +40,9 @@
     },
     "html": {
       "type": "text"
+    },
+    "projDescription": {
+      "type": "blocks"
     }
   }
 }

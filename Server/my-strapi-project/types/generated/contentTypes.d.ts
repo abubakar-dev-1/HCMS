@@ -606,6 +606,7 @@ export interface ApiProjectProject extends Struct.CollectionTypeSchema {
     projCategory: Schema.Attribute.String;
     projImage: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
     html: Schema.Attribute.Text;
+    projDescription: Schema.Attribute.Blocks;
     createdAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     publishedAt: Schema.Attribute.DateTime;
@@ -645,6 +646,8 @@ export interface ApiServiceService extends Struct.CollectionTypeSchema {
     ctaText: Schema.Attribute.String;
     ctaPara: Schema.Attribute.Text;
     serviceContent: Schema.Attribute.Blocks;
+    serviceAbout: Schema.Attribute.Blocks;
+    serviceAd: Schema.Attribute.Blocks;
     createdAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     publishedAt: Schema.Attribute.DateTime;
