@@ -70,7 +70,7 @@ export default function ProjectPage() {
           />
         </div>
 
-        <section className="prose" dangerouslySetInnerHTML={{ __html: project.html }} />
+        <section className="prose w-[30%] flex flex-wrap" dangerouslySetInnerHTML={{ __html: project.html }} />
       </main>
     </>
   );
