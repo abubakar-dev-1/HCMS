@@ -7,7 +7,10 @@ import qs from "qs";
 import Navbar from "@/components/navbar";
 import Link from "next/link";
 import ReactMarkdown from "react-markdown";
-import { BlocksRenderer, type BlocksContent } from "@strapi/blocks-react-renderer";
+import {
+  BlocksRenderer,
+  type BlocksContent,
+} from "@strapi/blocks-react-renderer";
 
 // Dynamic services data interface
 interface ServicesDataType {
@@ -120,7 +123,7 @@ export default function ServicePage() {
               </h1>
             </div>
 
-            <div className="px-4 md:px-20 xl:px-40 w-full flex flex-col gap-20">
+            <div className="px-4 md:px-20 xl:px-40 w-full flex flex-col md:flex-row gap-20">
               <div className="w-full flex gap-20">
                 <img
                   src={
@@ -132,7 +135,7 @@ export default function ServicePage() {
                     service?.serviceImage?.alternativeText ||
                     service?.heroHeadings
                   }
-                  className="hidden lg:block w-[50%]"
+                  className="hidden lg:block"
                   onError={(e) => {
                     console.error(
                       "Image failed to load:",
@@ -142,23 +145,28 @@ export default function ServicePage() {
                   }}
                 />
               </div>
-            </div>
-            <div className="w-full lg:w-1/2 flex flex-col gap-6">
-              {/* Render the content with BlocksRenderer */}
-              {content ? (
-                <BlocksRenderer content={content} />
-              ) : (
-                <p>No content available</p>
-              )}
-
-              <ReactMarkdown>
-                {service?.advertisement || "Advertisement details not available"}
-              </ReactMarkdown>
-              <ReactMarkdown>
-                {service?.about || "About information not provided"}
-              </ReactMarkdown>
+              <div className="w-full lg:w-1/2 flex flex-col gap-6">
+                {/* Render the content with BlocksRenderer */}
+                {content ? (
+                  <BlocksRenderer content={content} />
+                ) : (
+                  <p>No content available</p>
+                )}
+              </div>
             </div>
 
+              <div className="flex justify-around items-center">
+                <ReactMarkdown>
+                  {service?.advertisement ||
+                    "Advertisement details not available"}
+                </ReactMarkdown>
+
+                <div className="w-1/2">
+                <ReactMarkdown>
+                  {service?.about || "About information not provided"}
+                </ReactMarkdown>
+                </div>
+              </div>
             <section className="mt-20">
               <h2 className="text-center text-3xl font-bold mb-8">
                 Our Services
