@@ -87,25 +87,48 @@ export default function ProjectPage() {
 }
 
 /* Helper function to render the nested description content */
+/* Helper function to render the nested description content */
 function renderDescription(blocks: any[]) {
   return blocks.map((block, index) => {
     switch (block.type) {
       case "paragraph":
         return (
-          <p key={index}>
+          <p key={index} className="mb-4">
             {block.children.map((child: any, childIndex: number) => (
-              <p key={childIndex} style={{ fontWeight: child.bold ? "bold" : "normal" }}>
+              <p
+                key={childIndex}
+                style={{ fontWeight: child.bold ? "bold" : "normal" }}
+              >
                 {child.text}
               </p>
             ))}
           </p>
         );
 
+      case "heading":
+        const HeadingTag = (`h${block.level || 2}` as keyof JSX.IntrinsicElements); // Dynamically assign the heading tag
+        return (
+          <HeadingTag key={index} className="mt-6 mb-2 font-semibold">
+            {block.children.map((child: any, childIndex: number) => (
+              <p
+                key={childIndex}
+                style={{ fontWeight: child.bold ? "bold" : "normal" }}
+              >
+                {child.text}
+              </p>
+            ))}
+          </HeadingTag>
+        );
+
       case "list":
         return (
-          <ul key={index} className="list-disc list-inside">
+          <ul key={index} className="list-disc list-inside mb-4">
             {block.children.map((listItem: any, listItemIndex: number) => (
-              <li key={listItemIndex}>{listItem.children[0]?.text}</li>
+              <li key={listItemIndex}>
+                {listItem.children.map((child: any, childIndex: number) => (
+                  <span key={childIndex}>{child.text}</span>
+                ))}
+              </li>
             ))}
           </ul>
         );
@@ -115,3 +138,4 @@ function renderDescription(blocks: any[]) {
     }
   });
 }
+
