@@ -5,6 +5,10 @@ import { useParams } from "next/navigation";
 import { toast } from "react-hot-toast";
 import { Project } from "@/types/all-types";
 import qs from "qs";
+import {
+  BlocksRenderer,
+  type BlocksContent,
+} from "@strapi/blocks-react-renderer";
 import Navbar from "@/components/navbar";
 
 export default function ProjectPage() {
@@ -13,6 +17,7 @@ export default function ProjectPage() {
     ? params.documentId[0]
     : params?.documentId;
   const [project, setProject] = useState<Project | null>(null);
+  const [description, setDescription] = useState<BlocksContent | null>(null);
 
   useEffect(() => {
     if (projId) fetchProject(projId);
@@ -35,6 +40,10 @@ export default function ProjectPage() {
 
       const data = await res.json();
       setProject(data.data);
+
+      const description: BlocksContent = data.data.projDescription || null;
+      setDescription(description);
+
     } catch (error) {
       console.error("Error fetching the project:", error);
       toast.error("Error fetching the project.");
@@ -73,10 +82,14 @@ export default function ProjectPage() {
             }}
           />
         </div>
-        <section
-          className=" w-full flex flex-wrap"
-          dangerouslySetInnerHTML={{ __html: project.html }}
-        />
+            <div className="w-full flex flex-wrap">
+          {description ? (
+                <BlocksRenderer content={description} />
+              ) : (
+                <p></p>
+              )}
+              </div>
+        
       </main>
     </>
   );

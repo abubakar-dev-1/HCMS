@@ -160,7 +160,7 @@ export default function ServicePage() {
               {about ? (
                 <BlocksRenderer content={about} />
               ) : (
-                <p>No content available</p>
+                <p></p>
               )}
               </div>
             </div>
@@ -171,7 +171,7 @@ export default function ServicePage() {
               {advertisement ? (
                 <BlocksRenderer content={advertisement} />
               ) : (
-                <p>No content available</p>
+                <p></p>
               )}
               </div>
 
@@ -182,7 +182,7 @@ export default function ServicePage() {
                 {content ? (
                   <BlocksRenderer content={content} />
                 ) : (
-                  <p>No content available</p>
+                  <p> </p>
                 )}
               </div>
             </div>

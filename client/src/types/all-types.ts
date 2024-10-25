@@ -40,6 +40,7 @@ interface Product {
     html: string;
     projCategory: string;
     documentId?:string
+    projDescription?:string
     // createdAt?: string;
     // updatedAt?: string;
   };

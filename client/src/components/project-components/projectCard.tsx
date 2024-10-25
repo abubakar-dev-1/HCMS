@@ -41,7 +41,7 @@ export default function ProjectCard({ project }: { project: Project }) {
       </div>
 
       <h2 className="text-2xl p-3 font-semibold">{truncatedTitle}</h2>
-      <p className="px-3 w-[50%] pb-4">{truncatedDescription} </p>
+      <p className="px-3  pb-4">{truncatedDescription} </p>
     </Link>
   );
 }
