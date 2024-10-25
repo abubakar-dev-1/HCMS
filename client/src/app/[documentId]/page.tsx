@@ -177,7 +177,7 @@ export default function ServicePage() {
 
              
 
-              <div className=" md:mt-0 mt-7">
+              <div className=" md:mt-0 mt-7 w-[50%]">
                 {/* Render the content with BlocksRenderer */}
                 {content ? (
                   <BlocksRenderer content={content} />
