@@ -87,7 +87,6 @@ export default function ProjectPage() {
 }
 
 /* Helper function to render the nested description content */
-/* Helper function to render the nested description content */
 function renderDescription(blocks: any[]) {
   return blocks.map((block, index) => {
     switch (block.type) {
@@ -95,27 +94,27 @@ function renderDescription(blocks: any[]) {
         return (
           <p key={index} className="mb-4">
             {block.children.map((child: any, childIndex: number) => (
-              <p
+              <span
                 key={childIndex}
                 style={{ fontWeight: child.bold ? "bold" : "normal" }}
               >
                 {child.text}
-              </p>
+              </span>
             ))}
           </p>
         );
 
       case "heading":
-        const HeadingTag = (`h${block.level || 2}` as keyof JSX.IntrinsicElements); // Dynamically assign the heading tag
+        const HeadingTag = (`h${block.level || 2}` as keyof JSX.IntrinsicElements); // Dynamically assign heading level
         return (
           <HeadingTag key={index} className="mt-6 mb-2 font-semibold">
             {block.children.map((child: any, childIndex: number) => (
-              <p
+              <span
                 key={childIndex}
                 style={{ fontWeight: child.bold ? "bold" : "normal" }}
               >
                 {child.text}
-              </p>
+              </span>
             ))}
           </HeadingTag>
         );
