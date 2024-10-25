@@ -167,7 +167,7 @@ export default function ServicePage() {
 
             <div className="flex  flex-col md:flex-row justify-start md:justify-around md:items-center items-start md:px-0 px-3">
 
-              <div className="md:w-[50%] w-full">
+              <div className="md:mt-0 mt-2">
               {advertisement ? (
                 <BlocksRenderer content={advertisement} />
               ) : (
@@ -177,7 +177,7 @@ export default function ServicePage() {
 
              
 
-              <div className="md:w-[50%] w-full">
+              <div className="md:w-[50%] w-full md:mt-0 mt-7">
                 {/* Render the content with BlocksRenderer */}
                 {content ? (
                   <BlocksRenderer content={content} />
