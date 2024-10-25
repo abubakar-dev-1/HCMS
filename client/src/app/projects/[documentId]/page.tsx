@@ -125,12 +125,12 @@ function renderDescription(blocks: any[]) {
 /* Helper function to render children elements */
 function renderChildren(children: any[]) {
   return children.map((child, childIndex) => (
-    <span
+    <p
       key={childIndex}
       style={{ fontWeight: child.bold ? "bold" : "normal" }}
     >
       {child.text}
-    </span>
+    </p>
   ));
 }
 
