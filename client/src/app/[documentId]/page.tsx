@@ -1,11 +1,11 @@
-'use client';
+"use client";
 
 import { useEffect, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
 import { ServiceData } from "@/types/all-types"; // Ensure this path is correct
-import qs from 'qs';
+import qs from "qs";
 import Navbar from "@/components/navbar";
-import Link from 'next/link';
+import Link from "next/link";
 
 // Dynamic services data interface
 interface ServicesDataType {
@@ -14,7 +14,9 @@ interface ServicesDataType {
 
 export default function ServicePage() {
   const params = useParams();
-  const serviceId = Array.isArray(params?.documentId) ? params.documentId[0] : params?.documentId;
+  const serviceId = Array.isArray(params?.documentId)
+    ? params.documentId[0]
+    : params?.documentId;
   const router = useRouter();
 
   const [service, setService] = useState<ServiceData | null>(null);
@@ -30,7 +32,7 @@ export default function ServicePage() {
 
   async function fetchServices(id: string) {
     try {
-      const baseUrl = process.env.NEXT_PUBLIC_BASE_URL ;
+      const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
       const path = `/api/services/${id}`;
       const url = new URL(path, baseUrl);
 
@@ -49,7 +51,9 @@ export default function ServicePage() {
       setService(data.data);
     } catch (error: any) {
       console.error("Error fetching service:", error);
-      setError(error.message || "An error occurred while fetching the service.");
+      setError(
+        error.message || "An error occurred while fetching the service."
+      );
     }
   }
 
@@ -87,7 +91,7 @@ export default function ServicePage() {
           <>
             <div className="h-screen flex items-center justify-center relative w-full overflow-hidden">
               <img
-                 src={
+                src={
                   service?.heroImage?.url?.startsWith("http")
                     ? service.heroImage.url
                     : `${process.env.NEXT_PUBLIC_BASE_URL}${service?.heroImage?.url}`
@@ -112,35 +116,45 @@ export default function ServicePage() {
             <div className="px-4 md:px-20 xl:px-40 w-full flex flex-col gap-20">
               <div className="w-full flex gap-20">
                 <img
-                src={
-                  service?.serviceImage?.url?.startsWith("http")
-                    ? service?.serviceImage.url
-                    : `${process.env.NEXT_PUBLIC_BASE_URL}${service?.serviceImage?.url}`
-                }
-                alt={
-                  service?.serviceImage?.alternativeText || service?.heroHeadings
-                }
-                className="hidden lg:block w-[50%]"
-                onError={(e) => {
-                  console.error(
-                    "Image failed to load:",
-                    service?.serviceImage?.url
-                  );
-                  e.currentTarget.src = "/fallback-image.jpg"; // Optional fallback image
-                }}
-                  
-                  
+                  src={
+                    service?.serviceImage?.url?.startsWith("http")
+                      ? service?.serviceImage.url
+                      : `${process.env.NEXT_PUBLIC_BASE_URL}${service?.serviceImage?.url}`
+                  }
+                  alt={
+                    service?.serviceImage?.alternativeText ||
+                    service?.heroHeadings
+                  }
+                  className="hidden lg:block w-[50%]"
+                  onError={(e) => {
+                    console.error(
+                      "Image failed to load:",
+                      service?.serviceImage?.url
+                    );
+                    e.currentTarget.src = "/fallback-image.jpg"; // Optional fallback image
+                  }}
                 />
-                <div className="flex flex-col justify-start items-start w-[50%] md:items-center md:justify-center gap-8">
-                  <section className="w-[30%]" dangerouslySetInnerHTML={{ __html: service?.content || "" }} />
-                  <section dangerouslySetInnerHTML={{ __html: service?.advertisement || "" }} />
-                  <section dangerouslySetInnerHTML={{ __html: service?.about || "" }} />
-                </div>
               </div>
+            </div>
+            <div className="w-full lg:w-1/2 flex flex-col gap-6">
+              <p className="text-lg text-gray-700">
+                {service?.content || "No content available at the moment."}
+              </p>
+
+              <p className="text-lg text-gray-700">
+                {service?.advertisement ||
+                  "Advertisement details not available."}
+              </p>
+
+              <p className="text-lg text-gray-700">
+                {service?.about || "About information not provided."}
+              </p>
             </div>
 
             <section className="mt-20">
-              <h2 className="text-center text-3xl font-bold mb-8">Our Services</h2>
+              <h2 className="text-center text-3xl font-bold mb-8">
+                Our Services
+              </h2>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 justify-items-center gap-8 relative">
                 {services.map((service, index) => (
                   <div
@@ -155,7 +169,8 @@ export default function ServicePage() {
                           : `${process.env.NEXT_PUBLIC_BASE_URL}${service?.serviceImage?.url}`
                       }
                       alt={
-                        service?.serviceImage?.alternativeText || service?.heroHeadings
+                        service?.serviceImage?.alternativeText ||
+                        service?.heroHeadings
                       }
                       className="w-full h-40 object-cover rounded-t-md"
                       onError={(e) => {
@@ -165,7 +180,6 @@ export default function ServicePage() {
                         );
                         e.currentTarget.src = "/fallback-image.jpg"; // Optional fallback image
                       }}
-                      
                     />
                     <h3 className="text-lg text-center font-semibold mt-4 mb-4">
                       {service.name}
@@ -177,23 +191,22 @@ export default function ServicePage() {
 
             <div className="h-screen flex items-center justify-center relative w-full overflow-hidden">
               <img
-              src={
-                service?.ctaImage?.url?.startsWith("http")
-                  ? service?.ctaImage.url
-                  : `${process.env.NEXT_PUBLIC_BASE_URL}${service?.ctaImage?.url}`
-              }
-              alt={
-                service?.ctaImage?.alternativeText || service?.heroHeadings
-              }
-              className="object-cover w-[90%] h-[80%]"
-              onError={(e) => {
-                console.error(
-                  "Image failed to load:",
-                  service?.ctaImage?.url
-                );
-                e.currentTarget.src = "/fallback-image.jpg"; // Optional fallback image
-              }}
-                
+                src={
+                  service?.ctaImage?.url?.startsWith("http")
+                    ? service?.ctaImage.url
+                    : `${process.env.NEXT_PUBLIC_BASE_URL}${service?.ctaImage?.url}`
+                }
+                alt={
+                  service?.ctaImage?.alternativeText || service?.heroHeadings
+                }
+                className="object-cover w-[90%] h-[80%]"
+                onError={(e) => {
+                  console.error(
+                    "Image failed to load:",
+                    service?.ctaImage?.url
+                  );
+                  e.currentTarget.src = "/fallback-image.jpg"; // Optional fallback image
+                }}
               />
               <h1 className="absolute top-[50%] left-1/2 -translate-x-1/2 text-2xl md:text-5xl text-white font-semibold">
                 {service?.ctaText}
@@ -214,9 +227,15 @@ export default function ServicePage() {
       <style jsx>{`
         /* Random positions for desktop */
         @media (min-width: 768px) {
-          .random-position-0 { transform: translateY(-20px) translateX(-15px); }
-          .random-position-1 { transform: translateY(30px) translateX(10px); }
-          .random-position-2 { transform: translateY(-40px) translateX(5px); }
+          .random-position-0 {
+            transform: translateY(-20px) translateX(-15px);
+          }
+          .random-position-1 {
+            transform: translateY(30px) translateX(10px);
+          }
+          .random-position-2 {
+            transform: translateY(-40px) translateX(5px);
+          }
         }
 
         /* Single-column layout for mobile */
