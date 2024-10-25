@@ -145,14 +145,10 @@ export default function ServicePage() {
                   }}
                 />
               </div>
-              <div className="w-full lg:w-1/2 flex flex-col gap-6">
-                {/* Render the content with BlocksRenderer */}
-                {content ? (
-                  <BlocksRenderer content={content} />
-                ) : (
-                  <p>No content available</p>
-                )}
-              </div>
+             
+              <ReactMarkdown>
+                  {service?.about || "About information not provided"}
+                </ReactMarkdown>
             </div>
 
               <div className="flex justify-around items-center">
@@ -162,10 +158,13 @@ export default function ServicePage() {
                 </ReactMarkdown>
 
                 <div className="w-1/2">
-                <ReactMarkdown>
-                  {service?.about || "About information not provided"}
-                </ReactMarkdown>
-                </div>
+                {/* Render the content with BlocksRenderer */}
+                {content ? (
+                  <BlocksRenderer content={content} />
+                ) : (
+                  <p>No content available</p>
+                )}
+              </div>
               </div>
             <section className="mt-20">
               <h2 className="text-center text-3xl font-bold mb-8">
