@@ -119,7 +119,7 @@ const ProjectsCat = () => {
                             {project.projTitle}
                           </h3>
                           <p className="text-sm text-white mb-3 text-center">
-                            {project.projSubTitle}
+                            {project.html}
                           </p>
                           <AiOutlineArrowUp className="text-white w-6 h-6 mt-auto mb-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-in-out delay-200" />
                         </div>
