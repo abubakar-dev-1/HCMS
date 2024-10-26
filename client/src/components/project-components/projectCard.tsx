@@ -9,9 +9,9 @@ export default function ProjectCard({ project }: { project: Project }) {
       : project.projSubTitle;
 
   const truncatedTitle =
-    project.projTitle.length > 40
-      ? project.projTitle.substring(0, 40) + "..."
-      : project.projTitle;
+    project.projHeader.length > 40
+      ? project.projHeader.substring(0, 40) + "..."
+      : project.projHeader;
 
   const truncatedDescription = project.html;
 
