@@ -137,13 +137,13 @@ export default function ProductPage() {
         )}
 
         {relatedProducts.length > 0 && (
-          <section className="mt-20">
+          <section className="mt-20 ">
             <h3 className="text-2xl font-semibold mb-6">Related Products</h3>
             <div className="">
               <Slider ref={sliderRef} {...sliderSettings}>
                 {relatedProducts.map((relatedProduct) => (
                   <div key={relatedProduct.id} className="p-4">
-                    <div className="bg-white shadow-md rounded-lg p-4 hover:shadow-lg transition">
+                    <div className="bg-white w-[50%] shadow-md rounded-lg p-4 hover:shadow-lg transition">
                       <Link href={`/product/${relatedProduct.documentId}`}>
                         <img
                           src={getImageUrl(relatedProduct.productImage?.url)}
