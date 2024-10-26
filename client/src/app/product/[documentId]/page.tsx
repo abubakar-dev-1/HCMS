@@ -148,7 +148,7 @@ export default function ProductPage() {
                         <img
                           src={getImageUrl(relatedProduct.productImage?.url)}
                           alt={relatedProduct.productImage?.alternativeText || relatedProduct.productTitle}
-                          className="w-full h-40 object-contain rounded-md"
+                          className="w-[50%] h-40 object-contain rounded-md"
                         />
                         <h4 className="mt-4 font-semibold text-lg">{relatedProduct.productTitle}</h4>
                         <p className="text-gray-500 text-sm mt-1">${relatedProduct.productPrice}</p>
