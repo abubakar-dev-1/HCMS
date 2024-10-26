@@ -143,7 +143,7 @@ export default function ProductPage() {
               <Slider ref={sliderRef} {...sliderSettings}>
                 {relatedProducts.map((relatedProduct) => (
                   <div key={relatedProduct.id} className="p-4">
-                    <div className="bg-white w-[50%] shadow-md rounded-lg p-4 hover:shadow-lg transition">
+                    <div className="bg-white w-full md:w-[50%] shadow-md rounded-lg p-4 hover:shadow-lg transition">
                       <Link href={`/product/${relatedProduct.documentId}`}>
                         <img
                           src={getImageUrl(relatedProduct.productImage?.url)}
