@@ -39,7 +39,7 @@ const ContactPage = () => {
           <p className='w-full'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Omnis et ex voluptatem sed impedit earum.</p>
           </div>
 
-          <div className='grid grid-cols-2 gap-7'>
+          <div className='grid grid-cols-1 md:grid-cols-2 gap-7'>
             <div>
               <h1 className='font-semibold mb-2'>Call Center</h1>
               <p>1234567</p>
@@ -69,7 +69,7 @@ const ContactPage = () => {
       <div>
 
       </div>
-      <div className='w-[290%] md:w-[70%] p-5 lg:p-0'>
+      <div className='lg:w-[290%] w-[100%] hidden md:block p-5 lg:p-0'>
       <ContactComp/>
       </div>
     </div>

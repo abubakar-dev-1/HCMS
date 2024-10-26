@@ -224,12 +224,12 @@ const Navbar = () => {
       isVisible
         ? "bg-white text-black border-gray-100 border rounded-full"
         : "pt-5 text-white"
-    } mt-5 mx-5 rounded-full flex flex-col transition duration-200 ease-in-out z-50`}
+    } mt-5 mx-5 rounded-full  transition duration-200 ease-in-out z-50`}
   >
       <nav className="w-full text-black flex py-3 items-center justify-between border-gray-200 px-4 xl:px-16">
         {/* Logo */}
         <Link href="/" className="min-w-max">
-          <img src="/logo.png" alt="logo" className="h-[60px]" />
+          <img src="/logo.png" alt="logo" className="md:h-[60px] h-[40px]" />
         </Link>
 
         {/* Desktop Navigation */}

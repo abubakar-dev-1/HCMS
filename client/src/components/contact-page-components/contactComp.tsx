@@ -58,7 +58,7 @@ const ContactComp: React.FC<ContactCompProps> = ({ title, desc }) => {
 
   return (
     <div
-      className="w-full h-full mt-9 md:mt-0  flex items-center justify-center lg:justify-end px-10 "
+      className="w-full h-full mt-9 md:mt-0  md:flex items-center justify-center lg:justify-end px-10 "
 
     >
 

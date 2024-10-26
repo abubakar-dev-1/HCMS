@@ -68,7 +68,7 @@ const Footer = () => {
       <div className="flex flex-col lg:flex-row w-full gap-12">
         <div className="w-full flex flex-col gap-4">
           <h1 className="text-white text-3xl font-medium">About</h1>
-          <img className="w-[30%]" src="/logo.png" alt="" />
+          <img className="w-[12%] lg:w-[30%]" src="/logo.png" alt="" />
           <div className="flex flex-col gap-1">
             <p className="text-white">
               L – 199, Model Town Extension, Lahore (54700) Pakistan
@@ -142,25 +142,25 @@ const Footer = () => {
           </div>
         </div>
 
-        <div className="md:flex hidden flex-col items-center">
+        <div className="md:flex justify-start  flex-col items-start lg:items-center">
           <h1 className="text-white text-lg w-[200px] font-medium">
             Other Companies
           </h1>
-          <div>
+          <div className="flex flex-col justify-start items-start">
             <img
               src="/footer/agridairy.png"
               alt="agridairy"
-              className="w-[60%] mr-5 mt-1"
+              className="w-[30%] lg:w-[60%] mr-5 mt-1"
             />
             <img
               src="/footer/agrifeeds.png"
               alt="agrifeeds"
-              className="w-[60%] mt-2 mr-5"
+              className="w-[30%] lg:w-[60%] mt-2 mr-5"
             />
             <img
               src="/footer/agrifoundation.png"
               alt="agrifoundation"
-              className="w-[60%]"
+              className="w-[30%] lg:w-[60%]"
             />
           </div>
         </div>
