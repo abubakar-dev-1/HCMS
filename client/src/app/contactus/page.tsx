@@ -32,7 +32,7 @@ const ContactPage = () => {
     </div>
 
 
-    <div className='p-5 px-8 flex justify-around items-center'>
+    <div className='p-5 px-8 flex flex-col lg:flex-row justify-around items-center'>
       <div className='flex flex-col gap-9 w-[100%]'>
         <div>
           <h1 className='text-3xl font-bold mb-2'>We are always ready to help you and answer your questions</h1>
