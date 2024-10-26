@@ -13,7 +13,7 @@ export default function ProductCard({ product }: { product: Product }) {
   return (
     <Link
       href={`/product/${product.documentId}`}
-      className="w-[270px] bg-white rounded-lg shadow-md p-9 hover:shadow-lg transition-shadow duration-300 cursor-pointer"
+      className="w-[270px] bg-white rounded-lg shadow-md p-9 hover:shadow-lg transition-shadow duration-300 cursor-pointer mb-3"
     >
       {/* Image Section */}
       <div className="relative w-full h-auto rounded-lg overflow-hidden">
