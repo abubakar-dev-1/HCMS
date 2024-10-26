@@ -105,7 +105,7 @@ export default function ProductPage() {
       <main className="my-40 px-4 md:px-20 xl:px-40 w-full flex flex-col">
         {product ? (
           <div>
-          <div className="w-full flex flex-col lg:flex-row gap-12 lg:gap-20">
+          <div className="w-full flex flex-col lg:flex-row justify-center lg:justify-normal items-center gap-12 lg:gap-20">
             <div className="w-full md:w-1/2">
               <img
                 src={getImageUrl(product.productImage?.url)}
