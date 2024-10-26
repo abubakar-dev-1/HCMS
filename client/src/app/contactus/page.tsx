@@ -69,7 +69,7 @@ const ContactPage = () => {
       <div>
 
       </div>
-      <div className='w-[290%]'>
+      <div className='w-[290%] md:w-[70%] p-5 lg:p-0'>
       <ContactComp/>
       </div>
     </div>
