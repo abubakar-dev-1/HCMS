@@ -49,6 +49,9 @@
     },
     "productDetail": {
       "type": "text"
+    },
+    "description": {
+      "type": "blocks"
     }
   }
 }

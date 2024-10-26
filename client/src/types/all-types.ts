@@ -2,7 +2,7 @@ interface Product {
   id?:number
   pid: string;
   productTitle: string;
-  productDescription: string;
+ description: string;
   productPrice: number;
   SKU: string;
   createdAt: string;
@@ -12,7 +12,7 @@ interface Product {
   productSubCategory:string
   locale: string;
   documentId?:string
-  productDetail:string
+  productDescription:string
   isOnSale?:boolean
   productImage?: {
     id: number;

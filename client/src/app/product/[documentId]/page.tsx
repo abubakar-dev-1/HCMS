@@ -25,6 +25,7 @@ export default function ProductPage() {
   const productId = Array.isArray(params?.documentId) ? params.documentId[0] : params?.documentId;
   const [product, setProduct] = useState<Product | null>(null);
   const [relatedProducts, setRelatedProducts] = useState<Product[]>([]);
+  const [description, setDescription] = useState<any | null>(null);
 
   useEffect(() => {
     if (productId) fetchProduct(productId);
@@ -47,6 +48,7 @@ export default function ProductPage() {
 
       const data = await res.json();
       setProduct(data.data);
+      setDescription(data.data.description || null);
 
       fetchRelatedProducts(data.data.productCategory, data.data.documentId);
     } catch (error) {
@@ -102,6 +104,7 @@ export default function ProductPage() {
 
       <main className="my-40 px-4 md:px-20 xl:px-40 w-full flex flex-col">
         {product ? (
+          <div>
           <div className="w-full flex flex-col lg:flex-row gap-12 lg:gap-20">
             <div className="w-full md:w-1/2">
               <img
@@ -116,14 +119,19 @@ export default function ProductPage() {
               <p className="text-sm font-semibold text-gray-500 italic">
                 {`${product.productCategory} > ${product.productSubCategory}`}
               </p>
+              <p className="prose mt-6 font-bold text-xl">{product.productDescription}</p>
               <h2 className="text-3xl font-bold mt-4">{product.productTitle}</h2>
-              <p className="prose mt-6">{product.productDescription}</p>
               <div className="mt-8">
                 <p className="text-lg"><strong>SKU:</strong> {product.SKU}</p>
                 <p className="text-lg mt-2"><strong>Price:</strong> ${product.productPrice}</p>
               </div>
             </div>
           </div>
+            <div className="prose prose-lg text-gray-700 w-full">
+            {description ? renderDescription(description) : <p>No content available.</p>}
+        </div>
+          </div>
+          
         ) : (
           <p>Loading product data...</p>
         )}
@@ -164,4 +172,52 @@ export default function ProductPage() {
       </main>
     </>
   );
+}
+
+function renderDescription(blocks: any[]) {
+  return blocks.map((block, index) => {
+    switch (block.type) {
+      case "paragraph":
+        return (
+          <p key={index} className="mb-4">
+            {renderChildren(block.children)}
+          </p>
+        );
+
+      case "heading":
+        const HeadingTag = (`h${block.level || 2}` as keyof JSX.IntrinsicElements); // Dynamically set heading level
+        return (
+          <HeadingTag key={index} className="mt-6 mb-2 font-semibold">
+            {renderChildren(block.children)}
+          </HeadingTag>
+        );
+
+      case "list":
+        return (
+          <ul key={index} className="">
+            {block.children.map((listItem: any, listItemIndex: number) => (
+              <li key={listItemIndex}>
+                {renderChildren(listItem.children)}
+              </li>
+            ))}
+          </ul>
+            
+        );
+
+      default:
+        return <p key={index}>Unsupported block type: {block.type}</p>;
+    }
+  });
+}
+
+/* Helper function to render children elements */
+function renderChildren(children: any[]) {
+  return children.map((child, childIndex) => (
+    <p
+      key={childIndex}
+      style={{ fontWeight: child.bold ? "bold" : "normal" }}
+    >
+      {child.text}
+    </p>
+  ));
 }
