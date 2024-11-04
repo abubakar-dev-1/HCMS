@@ -63,7 +63,7 @@ const ProductCat = () => {
   const displayedCategories = new Set();
 
   return (
-    <div className="px-4 md:px-20 xl:px-40 md:py-20 py-10 w-full">
+    <div className="px-4 md:px-20  md:py-20 py-10 w-full">
       <AnimateToView>
         <h1 className="md:text-[40px] text-[30px] mb-3 text-white">
           Our featured products.
@@ -78,7 +78,7 @@ const ProductCat = () => {
               curated to meet all your essential livestock needs with ease.
             </p>
           </AnimateToView>
-          <div className="md:flex grid justify-items-center  items-center gap-6 flex-wrap md:gap-10">
+          <div className="lg:flex grid md:grid-cols-2 grid-cols-1 justify-items-center  items-center gap-6 flex-wrap md:gap-10">
             {categories.length > 0 ? (
               categories
                 .filter((product) => {
@@ -91,17 +91,17 @@ const ProductCat = () => {
                 .map((product) => (
                   <div
                     key={product.pid}
-                    className="relative group cursor-pointer bg-white rounded-xl shadow-lg overflow-hidden transition-transform duration-300 transform hover:scale-105 max-w-xl"
+                    className="relative group cursor-pointer bg-white rounded-xl shadow-lg overflow-hidden transition-transform duration-300 transform hover:scale-105 max-w-xs"
                   >
                     {/* Image Section */}
-                    <div className="h-48 w-[270px] overflow-hidden">
+                    <div className="h-48 w-auto lg:w-[340px] overflow-hidden">
                       <img
                         onClick={() =>
                           router.push(
                             `/product/category/${product.productCategory}`
                           )
                         }
-                        className="w-full h-full object-contain transition-transform duration-300 group-hover:scale-110"
+                        className=" object-cover object-center transition-transform duration-300 group-hover:scale-110"
                         src={
                           product.productImage?.url?.startsWith("http")
                             ? product.productImage.url
