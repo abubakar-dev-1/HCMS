@@ -97,7 +97,7 @@ const Hero = () => {
                   <img
                     src={img}
                     alt={`Slide ${i + 1}`}
-                    className="w-full h-auto object-contain object-top"
+                    className="w-full h-auto object-cover object-center"
                     style={{
                      // Adjust as needed
                       overflow: "hidden",
