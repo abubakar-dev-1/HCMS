@@ -23,27 +23,28 @@ const ContactPage = () => {
 
   return (
     <>
+    <div className='overflow-x-hidden'>
     {/* <div className="fixed w-full" style={{ zIndex: "999" }}>
       <Navbar/>
           
       </div>  */}
-    <div className="bg-DB w-full min-h-screen ">
+    <div className="bg-DB w-full min-h-full ">
       <Contact/>
     </div>
 
 
-    <div className='p-5 px-8 flex flex-col lg:flex-row justify-around items-center'>
-      <div className='flex flex-col gap-9 w-[100%]'>
-        <div>
-          <h1 className='text-3xl font-bold mb-2'>We are always ready to help you and answer your questions</h1>
-          <p className='w-full'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Omnis et ex voluptatem sed impedit earum.</p>
+    <div className='p-5 px-8 flex flex-col lg:flex-row justify-between items-center bg-LG'>
+      <div className='flex flex-col gap-9'>
+        <div className='w-[520px]'>
+          <h1 className='text-[30px] leading-[36px] font-[500] mb-2 -mt-0 md:-mt-32'>Have questions or need assistance? <span className='text-[#5C7226]'>Fill out the form,</span> and our team will get back to you shortly. You can also contact us by phone or email for faster service.</h1>
+          
           </div>
 
           <div className='grid grid-cols-1 md:grid-cols-2 gap-7'>
             <div>
               <h1 className='font-semibold mb-2'>Call Center</h1>
-              <p>1234567</p>
-              <p>+92 4567 876</p>
+              <p>+92 304-1115566</p>
+              <p>+92 42 3585 6772-5</p>
             </div>
 
             <div>
@@ -53,15 +54,15 @@ const ContactPage = () => {
 
             <div>
               <h1 className='font-semibold mb-2'>Email</h1>
-              <p>abc123@gmail.com</p>
+              <p>info@solveagripak.com</p>
             </div>
 
             <div>
               <h1 className='font-semibold mb-2'>Social Media</h1>
-              <div className='flex gap-5'>
-                  <FacebookIcon/>
-                  <TwitterIcon/>
-                  <LinkedinIcon/>
+              <div className='flex items-center gap-5 '>
+                  <FacebookIcon className='bg-[#A8CF45] rounded-full p-1' size={30}/>
+                  <TwitterIcon className='bg-[#A8CF45] rounded-full p-1' size={30}/>
+                  <LinkedinIcon className='bg-[#A8CF45] rounded-full p-1' size={30}/>
               </div>
             </div>
           </div>
@@ -69,7 +70,7 @@ const ContactPage = () => {
       <div>
 
       </div>
-      <div className='lg:w-[290%] w-[100%] hidden md:block p-5 lg:p-0'>
+      <div className='w-[100%] block lg:p-0'>
       <ContactComp/>
       </div>
     </div>
@@ -99,6 +100,7 @@ const ContactPage = () => {
             View in Google Maps
           </a>
         </div>
+      </div>
       </div>
     </>
   )

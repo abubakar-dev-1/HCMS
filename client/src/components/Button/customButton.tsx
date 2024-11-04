@@ -22,7 +22,7 @@ const CustomButton: React.FC<CustomButtonProps> = ({
       className={`${
         isLoading || disabled
           ? "bg-gray-400 cursor-not-allowed"
-          : "bg-blue-600 hover:bg-blue-700"
+          : "bg-[#000C36] hover:bg-[#000C36]"
       } 
       text-white font-semibold rounded-full min-w-[82px] h-12 py-2 px-4 
       flex items-center justify-center gap-2 transition-all duration-300 ease-in-out`}

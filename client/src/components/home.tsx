@@ -31,7 +31,7 @@ export default function Home() {
         <Partners />
       </div>
 
-      <div className="md:pb-32 pb-10 bg-DB">
+      <div className=" bg-DB">
         <Contact />
       </div>
 

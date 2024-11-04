@@ -58,42 +58,55 @@ const ContactComp: React.FC<ContactCompProps> = ({ title, desc }) => {
 
   return (
     <div
-      className="w-full h-full mt-9 md:mt-0  md:flex items-center justify-center lg:justify-end px-10 "
+      className="w-[900px] h-full mt-9 md:mt-0  md:flex items-center justify-center  px-10 "
 
     >
 
-      <div className="flex flex-col md:flex-row items-center md:items-end bg-white rounded-lg shadow-lg p-8 md:p-12 gap-12 w-full md:w-1/2">
+      <div className="flex flex-col border-[1px] border-[#919293] md:flex-row items-center md:items-end bg-white rounded-lg shadow-lg p-8 md:p-12 gap-12 w-full md:w-[60%]">
         {/* Left Section */}
        
-
+         
         {/* Right Section - Form */}
-        <form onSubmit={handleSubmit} className=" w-full">
+        <form onSubmit={handleSubmit} className="w-full">
+        <h1 className="font-[500] text-[20px] mb-6">Reach out to us!</h1>
           <div className="flex flex-col gap-6">
+            <div>
+            <p className="text-[14px] mb-[6px]">Name</p>
             <input
-              className="shadow-md border rounded-lg w-full py-3 px-4 text-gray-700 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="shadow-md border rounded-lg w-full py-3 px-4 text-gray-700 placeholder-gray-500 bg-[#EFF0F0] focus:outline-none focus:ring-2 focus:ring-[#CCCDCF]"
               type="text"
               placeholder="Name"
               value={name}
               onChange={(e) => setName(e.target.value)}
             />
+            </div>
+            <div>
+              <p className="text-[14px] mb-[6px]">Phone Number</p>
             <input
-              className="shadow-md border rounded-lg w-full py-3 px-4 text-gray-700 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="shadow-md border bg-[#EFF0F0] rounded-lg w-full py-3 px-4 text-gray-700 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-[#CCCDCF]"
               type="text"
               placeholder="Phone Number"
             />
+            </div>
+            <div>
+              <p className="text-[14px] mb-[6px]">Email</p>
             <input
-              className="shadow-md border rounded-lg w-full py-3 px-4 text-gray-700 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="shadow-md border bg-[#EFF0F0] rounded-lg w-full py-3 px-4 text-gray-700 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-[#CCCDCF]"
               type="email"
               placeholder="Email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
+            </div>
+            <div>
+              <p  className="text-[14px] mb-[6px]">Message</p>
             <textarea
-              className="shadow-md border rounded-lg w-full py-3 px-4 text-gray-700 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 min-h-[120px]"
+              className="shadow-md border bg-[#EFF0F0] rounded-lg w-full py-3 px-4 text-gray-700 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-[#CCCDCF] min-h-[120px]"
               placeholder="Message"
               value={message}
               onChange={(e) => setMessage(e.target.value)}
             ></textarea>
+            </div>
 
             <div className="mt-4">
               <CustomButton
