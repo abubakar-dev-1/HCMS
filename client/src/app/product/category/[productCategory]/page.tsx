@@ -62,10 +62,10 @@ export default function ProductsByCategoryPage() {
   // Render products
   return (
     <>
-    <div className="fixed w-full" style={{ zIndex: "999" }}>
+    {/* <div className="fixed w-full" style={{ zIndex: "999" }}>
       <Navbar/>
           
-      </div>
+      </div> */}
     <div className="w-full my-40 px-4 md:px-2 xl:px-10 grid  grid-cols-1 md:grid-cols-3 justify-items-center md:gap-9">
       {products.length === 0 && <div>No projects found for this category</div>}
       {products.map((product: Product) => (

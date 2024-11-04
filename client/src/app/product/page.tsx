@@ -63,10 +63,10 @@ export default function ProductsPage() {
 
   return (
     <>
-    <div className="fixed w-full" style={{ zIndex: "999" }}>
+    {/* <div className="fixed w-full" style={{ zIndex: "999" }}>
       <Navbar/>
           
-      </div> 
+      </div>  */}
     <div className="mt-36 text-center">
       <h1 className="text-3xl font-bold mb-8">Our Products</h1>
 

@@ -33,9 +33,9 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        {/* <div className="fixed w-full" style={{ zIndex: "999" }}>
+        <div className=" w-full" >
           <Navbar />
-        </div> */}
+        </div>
         <div className="flex flex-col min-h-screen">{children}
         <Footer/>
         </div>

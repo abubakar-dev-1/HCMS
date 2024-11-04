@@ -55,9 +55,9 @@ export default function ProjectPage() {
 
   return (
     <>
-      <div className="fixed w-full" style={{ zIndex: "999" }}>
+      {/* <div className="fixed w-full" style={{ zIndex: "999" }}>
         <Navbar />
-      </div>
+      </div> */}
       <main className="flex my-40 flex-col gap-10 px-4 md:px-20 lg:px-32 xl:px-64">
         <section className="flex flex-col gap-4 w-full">
           <h1 className="text-2xl md:text-3xl text-black tracking-wide font-semibold">

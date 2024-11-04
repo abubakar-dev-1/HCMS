@@ -180,7 +180,7 @@ const Navbar = () => {
         initial={{ opacity: 0, y: 10 }}
         animate={isOpen ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
         transition={{ ease: "circOut", duration: 0.15 }}
-        className="absolute top-full left-0 mt-2 rounded-md shadow-lg bg-white z-50"
+        className="absolute top-full left-0 mt-2 rounded-md shadow-lg bg-white z-[1000]"
       >
         <div className="py-1">
           {link.children?.map((c) => (
@@ -222,9 +222,9 @@ const Navbar = () => {
     <header
     className={`${
       isVisible
-        ? "bg-white text-black border-gray-100 border rounded-full"
-        : "pt-5 text-white"
-    } mt-5 mx-5 rounded-full  transition duration-200 ease-in-out z-50`}
+        ? "bg-white text-black  rounded-full"
+        : " text-white"
+    } rounded-full  transition duration-200 ease-in-out z-50`}
   >
       <nav className="w-full text-black flex py-3 items-center justify-between border-gray-200 px-4 xl:px-16">
         {/* Logo */}
@@ -261,7 +261,7 @@ const Navbar = () => {
         </div>
 
               <Link href="/contactus" passHref>
-                <button className="hidden lg:flex w-[178px] text-[16px] items-center justify-center bg-white p-2 rounded-full font-semibold">Book a Meeting <span className="ml-2"><ArrowUpRight size={18}/></span> </button>
+                <button className="hidden border-black border-[1px] lg:flex w-[178px] text-[16px] items-center justify-center bg-white p-2 rounded-full font-semibold">Book a Meeting <span className="ml-2"><ArrowUpRight size={18}/></span> </button>
               </Link>
 
         {/* Mobile Navigation */}

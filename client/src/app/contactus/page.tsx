@@ -23,10 +23,10 @@ const ContactPage = () => {
 
   return (
     <>
-    <div className="fixed w-full" style={{ zIndex: "999" }}>
+    {/* <div className="fixed w-full" style={{ zIndex: "999" }}>
       <Navbar/>
           
-      </div> 
+      </div>  */}
     <div className="bg-DB w-full min-h-screen ">
       <Contact/>
     </div>

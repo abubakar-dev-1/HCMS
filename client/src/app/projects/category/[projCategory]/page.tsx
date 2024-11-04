@@ -59,10 +59,10 @@ export default function ProjectCategoryPage() {
 
   return (
     <>
-    <div className="fixed w-full" style={{ zIndex: "999" }}>
+    {/* <div className="fixed w-full" style={{ zIndex: "999" }}>
       <Navbar/>
           
-      </div> 
+      </div>  */}
     <div className="w-full my-40 px-4 md:px-20 xl:px-40 grid gap-x-8 gap-y-16 grid-cols-1 md:grid-cols-3">
       {projects.length === 0 && <div>No projects found for this category</div>}
       {projects.map((project: Project) => (

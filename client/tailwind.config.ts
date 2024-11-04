@@ -11,7 +11,7 @@ const config: Config = {
   	extend: {
   		colors: {
   			DG: '#000000',
-  			LG: '#A8CF45',
+  			LG: '#E4F0C5',
   			LLG: '#F3FFFE',
   			DB: '#000C36',
   			background: 'hsl(var(--background))',

@@ -98,9 +98,9 @@ export default function ProductPage() {
 
   return (
     <>
-      <div className="fixed w-full z-50">
+      {/* <div className="fixed w-full z-50">
         <Navbar />
-      </div>
+      </div> */}
 
       <main className="my-40 px-4 md:px-20 xl:px-40 w-full flex flex-col">
         {product ? (

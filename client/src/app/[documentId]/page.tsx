@@ -101,9 +101,9 @@ export default function ServicePage() {
 
   return (
     <>
-      <div className="fixed w-full" style={{ zIndex: "999" }}>
+      {/* <div className="fixed w-full" style={{ zIndex: "999" }}>
         <Navbar />
-      </div>
+      </div> */}
 
       <main className="flex flex-col gap-20 mb-40">
         {error ? (

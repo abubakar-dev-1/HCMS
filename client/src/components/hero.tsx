@@ -72,20 +72,18 @@ const Hero = () => {
   const zoomScale = Math.max(1 - scrollPos / 1000, 0.8);
 
   return (
+     
     <div>
-      <div className="fixed w-full" style={{ zIndex: "999" }}>
-        <Navbar />
-      </div>
 
-      <div className="flex w-full items-center h-screen justify-center bg-[#A8CF45]">
+      <div className="flex w-full items-center h-screen justify-center ">
         {/* Zoom effect applied to image container */}
         <div
-          className="relative overflow-hidden rounded-2xl"
+          className="relative h-screen w-full overflow-hidden "
           style={{
-            transform: `scale(${zoomScale})`,
-            transition: "transform 0.2s ease-out", // Smooth transition
-            width: "96vw",
-            height: "96vh",
+            // transform: `scale(${zoomScale})`,
+            // transition: "transform 0.2s ease-out", // Smooth transition
+            width: "100vw",
+            height: "120vh",
           }}
         >
           {/* Slider */}
@@ -94,14 +92,14 @@ const Hero = () => {
               {images.map((img, i) => (
                 <div
                   key={i}
-                  className="flex w-full h-screen justify-center items-center relative"
+                  className="flex w-full relative"
                 >
                   <img
                     src={img}
                     alt={`Slide ${i + 1}`}
-                    className="w-full h-full object-cover object-center"
+                    className="w-full h-auto object-contain object-top"
                     style={{
-                      borderRadius: "20px", // Adjust as needed
+                     // Adjust as needed
                       overflow: "hidden",
                     }}
                   />
@@ -124,27 +122,27 @@ const Hero = () => {
             }}
             transition={{ duration: 1 }}
           >
-            <div className="flex px-2 md:px-4 gap-[20px] flex-col w-full mt-20 justify-center items-start">
+            <div className="flex px-2 md:px-4 gap-[20px] flex-col w-full justify-center items-center">
               <p className="text-white text-[16px] md:text-[36px]">
                 <strong className="text-[#A8CF45] w-full">SOLVE</strong> -
-                Solutions for Livestock <br /> Value-added Enterprises
+                Solutions for Livestock <br />    Value-added Enterprises
               </p>
-              <p className="text-white md:w-[60%] w-full">
+              {/* <p className="text-white md:w-[60%] w-full">
                 Lorem ipsum dolor sit amet consectetur adipisicing elit.
                 Adipisci doloremque tempora quae, laborum sunt quam rerum magnam
                 itaque impedit dolorem!
-              </p>
+              </p> */}
 
-              <a href="/projects">
+              {/* <a href="/projects">
                 <button className="bg-LG text-white py-2 px-2 md:mb-0 mb-2 md:px-3 text-[13px] md:text-lg rounded-lg">
                   Explore More
                 </button>
-              </a>
+              </a> */}
             </div>
           </motion.div>
 
           {/* Bouncing Icon */}
-          <div className="absolute bottom-10 w-full flex animate-bounce justify-center items-center">
+          <div className="absolute bottom-32 w-full flex animate-bounce justify-center items-center">
             <BsChevronCompactDown className="text-white text-4xl" />
           </div>
         </div>

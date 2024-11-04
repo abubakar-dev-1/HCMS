@@ -7,9 +7,11 @@ import Contact from './contact-page-components/contactus'
 import ProductCat from './product-component.tsx/productCards'
 import ServiceCat from './services-component/servicesCat'
 import ProjectsCat from './project-components/projectsCat'
+import Navbar from './navbar'
 export default function Home() {
   return (
     <div className="overflow-hidden w-full">
+       
         <Hero/>
         <div className="relative w-full bg-LG">
         <About />

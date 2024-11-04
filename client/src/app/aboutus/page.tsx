@@ -5,10 +5,10 @@ import Navbar from '@/components/navbar'
 export default function About() {
   return (
     <div>
-       <div className="fixed w-full" style={{ zIndex: "999" }}>
+       {/* <div className="fixed w-full" style={{ zIndex: "999" }}>
       <Navbar/>
           
-      </div>
+      </div> */}
       <AboutUs/>
     </div>
   )
