@@ -12,7 +12,9 @@ export default function Home() {
   return (
     <div className="overflow-hidden w-full">
        
+       <div className=''>
         <Hero/>
+        </div>
         <div className="relative w-full bg-LG">
         <About />
       </div>

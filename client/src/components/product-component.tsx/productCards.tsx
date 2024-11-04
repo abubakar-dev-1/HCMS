@@ -78,7 +78,7 @@ const ProductCat = () => {
               curated to meet all your essential livestock needs with ease.
             </p>
           </AnimateToView>
-          <div className="md:flex grid justify-items-center justify-center items-center gap-6 flex-wrap md:gap-10">
+          <div className="md:flex grid justify-items-center  items-center gap-6 flex-wrap md:gap-10">
             {categories.length > 0 ? (
               categories
                 .filter((product) => {
@@ -91,43 +91,51 @@ const ProductCat = () => {
                 .map((product) => (
                   <div
                     key={product.pid}
-                    className="relative group cursor-pointer bg-[#f0f4f875] border border-gray-300 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 p-4"
+                    className="relative group cursor-pointer bg-white rounded-xl shadow-lg overflow-hidden transition-transform duration-300 transform hover:scale-105 max-w-xl"
                   >
                     {/* Image Section */}
-                    <img
-                      onClick={() =>
-                        router.push(
-                          `/product/category/${product.productCategory}`
-                        )
-                      }
-                      className="w-full h-48 rounded-lg overflow-hidden object-cover hover:scale-110 transition-transform duration-300"
-                      src={
-                        product.productImage?.url?.startsWith("http")
-                          ? product.productImage.url
-                          : `${process.env.NEXT_PUBLIC_BASE_URL}${
-                              product.productImage?.url || "/default-image.jpg"
-                            }`
-                      }
-                      alt={
-                        product.productImage?.alternativeText ||
-                        product.productTitle
-                      }
-                      onError={(e) => {
-                        console.error(
-                          `Image failed to load: ${product.productImage?.url}`,
-                          e
-                        );
-                        e.currentTarget.src = "/default-image.jpg"; // Set fallback image on error
-                      }}
-                    />
-
-                    {/* Divider Line */}
-                    <div className="h-[1px] w-full bg-gray-300 my-4"></div>
+                    <div className="h-48 w-[270px] overflow-hidden">
+                      <img
+                        onClick={() =>
+                          router.push(
+                            `/product/category/${product.productCategory}`
+                          )
+                        }
+                        className="w-full h-full object-contain transition-transform duration-300 group-hover:scale-110"
+                        src={
+                          product.productImage?.url?.startsWith("http")
+                            ? product.productImage.url
+                            : `${process.env.NEXT_PUBLIC_BASE_URL}${
+                                product.productImage?.url ||
+                                "/default-image.jpg"
+                              }`
+                        }
+                        alt={
+                          product.productImage?.alternativeText ||
+                          product.productTitle
+                        }
+                        onError={(e) => {
+                          console.error(
+                            `Image failed to load: ${product.productImage?.url}`,
+                            e
+                          );
+                          e.currentTarget.src = "/default-image.jpg"; // Set fallback image on error
+                        }}
+                      />
+                    </div>
 
                     {/* Category Title */}
-                    <h1 className="text-lg md:text-xl font-semibold text-gray-900 text-center">
-                      {product.productCategory}
-                    </h1>
+                    <div className="flex items-center justify-between p-4 text-center bg-white">
+                      <h1 className="text-lg md:text-xl font-semibold text-gray-900">
+                        {product.productCategory}
+                      </h1>
+                      <Link
+                        href={`/product/category/${product.productCategory}`}
+                        className="mt-2 inline-flex items-center justify-center text-white bg-[#000C36] px-4 py-2 rounded-full font-semibold transition-colors duration-200 hover:bg-[#000c36ac]" 
+                      >
+                        Explore <span className="ml-1">&rarr;</span>
+                      </Link>
+                    </div>
                   </div>
                 ))
             ) : (
