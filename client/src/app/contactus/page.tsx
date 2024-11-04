@@ -33,10 +33,10 @@ const ContactPage = () => {
     </div>
 
 
-    <div className='p-5 px-8 flex flex-col lg:flex-row justify-between items-center bg-LG'>
+    <div className='p-5 md:px-8 flex flex-col lg:flex-row justify-between items-center bg-LG'>
       <div className='flex flex-col gap-9'>
-        <div className='w-[520px]'>
-          <h1 className='text-[30px] leading-[36px] font-[500] mb-2 -mt-0 md:-mt-32'>Have questions or need assistance? <span className='text-[#5C7226]'>Fill out the form,</span> and our team will get back to you shortly. You can also contact us by phone or email for faster service.</h1>
+        <div className='w-full lg:w-[520px]'>
+          <h1 className='md:text-[30px] text-[18px] leading-[20px] md:leading-[36px] font-[500] mb-2 -mt-0 md:-mt-32'>Have questions or need assistance? <span className='text-[#5C7226]'>Fill out the form,</span> and our team will get back to you shortly. You can also contact us by phone or email for faster service.</h1>
           
           </div>
 
@@ -70,7 +70,7 @@ const ContactPage = () => {
       <div>
 
       </div>
-      <div className='w-[100%] block lg:p-0'>
+      <div className='w-[100%] p-0 block lg:p-0'>
       <ContactComp/>
       </div>
     </div>
