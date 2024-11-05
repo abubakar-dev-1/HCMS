@@ -182,7 +182,7 @@ const Navbar = () => {
         initial={{ opacity: 0, y: 10 }}
         animate={isOpen ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
         transition={{ ease: "circOut", duration: 0.15 }}
-        className="absolute top-full left-0 mt-2 rounded-md shadow-lg bg-white z-50" // Set z-index here
+        className="absolute top-full left-0 mt-2 rounded-md shadow-lg bg-white z-[1000]" // Set z-index here
       >
         <div className="py-1">
           {link.children?.map((c) => (
