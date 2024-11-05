@@ -67,10 +67,10 @@ export default function ProductsPage() {
       <Navbar/>
           
       </div>  */}
-    <div className="mt-36 text-center">
+    <div className="mt-10 lg:mt-36 text-center">
       <h1 className="text-3xl font-bold mb-8">Our Products</h1>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 justify-items-center">
+      <div className="grid grid-cols-1 gap-y-6 md:gap-y-0 sm:grid-cols-2 lg:grid-cols-3 justify-items-center">
         {loading ? (
           <Skeleton count={1} height={500} width={500} />
         ) : (

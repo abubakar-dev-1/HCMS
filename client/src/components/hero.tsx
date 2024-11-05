@@ -83,7 +83,7 @@ const Hero = () => {
             // transform: `scale(${zoomScale})`,
             // transition: "transform 0.2s ease-out", // Smooth transition
             width: "100vw",
-            height: "120vh",
+            height: "100vh",
           }}
         >
           {/* Slider */}
@@ -97,7 +97,7 @@ const Hero = () => {
                   <img
                     src={img}
                     alt={`Slide ${i + 1}`}
-                    className="w-full h-auto object-cover object-center"
+                    className="w-full h-screen lg:h-auto object-cover object-center"
                     style={{
                      // Adjust as needed
                       overflow: "hidden",

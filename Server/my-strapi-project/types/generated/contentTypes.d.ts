@@ -569,7 +569,8 @@ export interface ApiProductProduct extends Struct.CollectionTypeSchema {
     productSubCategory: Schema.Attribute.String;
     isOnSale: Schema.Attribute.Boolean;
     productImage: Schema.Attribute.Media<
-      'images' | 'files' | 'videos' | 'audios'
+      'images' | 'files' | 'videos' | 'audios',
+      true
     >;
     productDetail: Schema.Attribute.Text;
     description: Schema.Attribute.Blocks;

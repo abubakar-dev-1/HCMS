@@ -14,7 +14,7 @@ const Contact = () => {
       {/* Centered Text Div */}
       <div className="relative inset-0 flex flex-col items-center justify-center  z-[100] text-white">
         <h1 className="text-[36px] font-[500] mb-4">Contact Us</h1>
-        <p className="text-white text-[16px] max-w-[460px]">
+        <p className="text-white text-[16px] max-w-[460px] px-2 md:px-0">
         We're here to help with all your dairy and agricultural needs. Reach out to us for expert guidance and personalized solutions.
         </p>
       </div>

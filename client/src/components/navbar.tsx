@@ -314,7 +314,7 @@ const MobileNav = ({ navLinks }: { navLinks: LinkWithChildren[] }) => {
   }, [lastScrollPos]);
 
   return (
-    <div>
+    <div className="z-[1000]">
       <RiMenu3Fill
         size={24}
         className={`md:hidden ${

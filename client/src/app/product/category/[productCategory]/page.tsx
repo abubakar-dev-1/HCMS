@@ -28,10 +28,10 @@ export default function ProductsByCategoryPage() {
           },
           populate: {
             productImage: {
-              fields: ["url", "alternativeText"], // Fetch the image URL and alt text
+              fields: ["url", "alternativeText"], // Fetch multiple images
             },
           },
-        });
+        }, { encodeValuesOnly: true });
 
         const url = `${baseUrl}${path}?${query}`;
         const res = await fetch(url);
@@ -66,7 +66,7 @@ export default function ProductsByCategoryPage() {
       <Navbar/>
           
       </div> */}
-    <div className="w-full my-40 px-4 md:px-2 xl:px-10 grid  grid-cols-1 md:grid-cols-3 justify-items-center md:gap-9">
+    <div className="w-full my-10 gap-y-5 lg:my-40 px-4 md:px-2 xl:px-10 grid  grid-cols-1 md:grid-cols-3 justify-items-center md:gap-9">
       {products.length === 0 && <div>No projects found for this category</div>}
       {products.map((product: Product) => (
         <ProductCard key={product.pid} product={product} />

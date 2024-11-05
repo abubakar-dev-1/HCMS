@@ -2,50 +2,39 @@
 
 import { useEffect, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
-import { ServiceData } from "@/types/all-types"; // Ensure this path is correct
+import { ServiceData } from "@/types/all-types";
 import qs from "qs";
-import Navbar from "@/components/navbar";
-import Link from "next/link";
-import ReactMarkdown from "react-markdown";
-import {
-  BlocksRenderer,
-  type BlocksContent,
-} from "@strapi/blocks-react-renderer";
+import { BlocksContent } from "@strapi/blocks-react-renderer";
+import { ArrowRight } from 'lucide-react';
 
-// Dynamic services data interface
-interface ServicesDataType {
-  [key: string]: ServiceData;
-}
+const getImageUrl = (imageUrl: string | undefined): string =>
+  imageUrl?.startsWith("http")
+    ? imageUrl
+    : `${process.env.NEXT_PUBLIC_BASE_URL}${imageUrl || "/fallback-image.jpg"}`;
 
 export default function ServicePage() {
   const params = useParams();
-  const serviceId = Array.isArray(params?.documentId)
-    ? params.documentId[0]
-    : params?.documentId;
+  const serviceId = Array.isArray(params?.documentId) ? params.documentId[0] : params?.documentId;
   const router = useRouter();
 
   const [service, setService] = useState<ServiceData | null>(null);
   const [error, setError] = useState<string | null>(null);
-  const [services, setServices] = useState<ServiceData[]>([]);
   const [content, setContent] = useState<BlocksContent | null>(null);
   const [about, setAbout] = useState<BlocksContent | null>(null);
-  const [advertisement, setAdvertisement] = useState<BlocksContent | null>(
-    null
-  ); // Added content state
+  const [advertisement, setAdvertisement] = useState<BlocksContent | null>(null);
 
   useEffect(() => {
     if (serviceId) {
-      fetchServices(serviceId);
+      fetchService(serviceId);
     }
-    fetchAllServices();
   }, [serviceId]);
 
-  async function fetchServices(id: string) {
+  async function fetchService(id: string) {
     try {
       const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
       const path = `/api/services/${id}`;
       const url = new URL(path, baseUrl);
-
+  
       url.search = qs.stringify({
         populate: {
           serviceImage: { fields: ["url", "alternativeText"] },
@@ -53,80 +42,37 @@ export default function ServicePage() {
           ctaImage: { fields: ["url", "alternativeText"] },
         },
       });
-
+  
       const res = await fetch(url.toString());
-      if (!res.ok) throw new Error(`Failed to fetch service with id ${id}.`);
-
+      if (!res.ok) throw new Error("Failed to fetch service");
+  
       const data = await res.json();
       setService(data.data);
-
-      const content: BlocksContent = data.data.serviceContent || null;
-      setContent(content);
-
-      const advertisement: BlocksContent = data.data.serviceAd || null; // Extracting serviceContent
-      setAdvertisement(advertisement);
-
-      const about: BlocksContent = data.data.serviceAbout || null; // Extracting serviceContent
-      setAbout(about);
-
-      console.log(data); // Keeping your console log
-    } catch (error: any) {
-      console.error("Error fetching service:", error);
-      setError(
-        error.message || "An error occurred while fetching the service."
-      );
-    }
-  }
-
-  async function fetchAllServices() {
-    try {
-      const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
-      const path = `/api/services`;
-
-      const url = new URL(path, baseUrl);
-      url.search = qs.stringify({
-        populate: { serviceImage: { fields: ["url", "alternativeText"] } },
-      });
-
-      const res = await fetch(url.toString());
-      if (!res.ok) throw new Error(`Failed to fetch services.`);
-
-      const data = await res.json();
-      setServices(data.data);
-    } catch (error: any) {
-      console.error("Error fetching services:", error);
-      setError(error.message || "An error occurred while fetching services.");
+      setContent(data.data.serviceContent || null);
+      setAbout(data.data.serviceAbout || null);
+      setAdvertisement(data.data.serviceAd || null);
+    } catch (error) {
+      const errMessage = (error as Error).message || "An error occurred while fetching the service.";
+      console.error("Error fetching service:", errMessage);
+      setError(errMessage);
     }
   }
 
   return (
     <>
-      {/* <div className="fixed w-full" style={{ zIndex: "999" }}>
-        <Navbar />
-      </div> */}
-
-      <main className="flex flex-col gap-20 mb-40">
+      <main className="flex flex-col gap-8 md:gap-20 mb-9 md:mb-20">
         {error ? (
           <p className="text-red-500">Error: {error}</p>
         ) : (
           <>
             <div className="h-screen flex items-center justify-center relative w-full overflow-hidden">
               <img
-                src={
-                  service?.heroImage?.url?.startsWith("http")
-                    ? service.heroImage.url
-                    : `${process.env.NEXT_PUBLIC_BASE_URL}${service?.heroImage?.url}`
-                }
-                alt={
-                  service?.heroImage?.alternativeText || service?.heroHeadings
-                }
+                src={getImageUrl(service?.heroImage?.url)}
+                alt={service?.heroImage?.alternativeText || service?.heroHeadings}
                 className="object-cover w-full h-full"
                 onError={(e) => {
-                  console.error(
-                    "Image failed to load:",
-                    service?.heroImage?.url
-                  );
-                  e.currentTarget.src = "/fallback-image.jpg"; // Optional fallback image
+                  console.error("Image failed to load:", service?.heroImage?.url);
+                  e.currentTarget.src = "/fallback-image.jpg";
                 }}
               />
               <h1 className="absolute top-[50%] w-full text-center left-1/2 -translate-x-1/2 text-2xl md:text-5xl text-white font-semibold tracking-wide">
@@ -134,130 +80,95 @@ export default function ServicePage() {
               </h1>
             </div>
 
-            <div className="px-4 md:px-20 xl:px-40 w-full flex flex-col md:flex-row gap-20">
-              <div className="w-full flex gap-20">
+            <div className="px-4 md:px-20 w-full flex flex-col md:flex-row justify-between md:gap-20 gap-5">
+              <div className="w-[100%] rounded-lg flex gap-20">
                 <img
-                  src={
-                    service?.serviceImage?.url?.startsWith("http")
-                      ? service?.serviceImage.url
-                      : `${process.env.NEXT_PUBLIC_BASE_URL}${service?.serviceImage?.url}`
-                  }
-                  alt={
-                    service?.serviceImage?.alternativeText ||
-                    service?.heroHeadings
-                  }
-                  className="hidden lg:block w-full md:-[50%]"
+                  src={getImageUrl(service?.serviceImage?.url)}
+                  alt={service?.serviceImage?.alternativeText || service?.heroHeadings}
+                  className="w-full md:w-[100%] rounded-lg"
                   onError={(e) => {
-                    console.error(
-                      "Image failed to load:",
-                      service?.serviceImage?.url
-                    );
-                    e.currentTarget.src = "/fallback-image.jpg"; // Optional fallback image
+                    console.error("Image failed to load:", service?.serviceImage?.url);
+                    e.currentTarget.src = "/fallback-image.jpg";
                   }}
                 />
               </div>
-              <div className="w-full md:w-[50%]">
-              {about ? (
-                <BlocksRenderer content={about} />
-              ) : (
-                <p></p>
-              )}
+              <div className="w-full md:w-[50%] py-0 md:py-16">
+                {about ? renderDescription(about) : <p>No about content available.</p>}
               </div>
             </div>
 
-            <div className="flex  flex-col md:flex-row justify-start md:justify-around md:items-center items-start md:px-5 px-4 ">
-
-              <div className="md:mt-0 mt-2 md:w-[30%] w-full">
-              {advertisement ? (
-                <BlocksRenderer content={advertisement} />
-              ) : (
-                <p></p>
-              )}
-              </div>
-
-             
-
-              <div className=" md:mt-0 mt-7 md:w-[50%] w-full">
-                {/* Render the content with BlocksRenderer */}
-                {content ? (
-                  <BlocksRenderer content={content} />
-                ) : (
-                  <p> </p>
-                )}
+            <div className="flex flex-col md:flex-row justify-start bg-LG py-8 items-start md:px-24 px-4">
+              <div className="md:w-[70%] w-full">
+                {content ? renderDescription(content) : <p>No content available.</p>}
               </div>
             </div>
-            <section className="mt-20">
-              <h2 className="text-center text-3xl font-bold mb-8">
-                Our Services
-              </h2>
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 justify-items-center gap-8 relative">
-                {services.map((service, index) => (
-                  <div
-                    key={service.documentId}
-                    className={`bg-white w-[80%] md:w-[60%] shadow-md rounded-lg hover:shadow-lg transition cursor-pointer random-position-${index}`}
-                    onClick={() => router.push(`/${service.documentId}`)}
-                  >
-                    <img
-                      src={
-                        service?.serviceImage?.url?.startsWith("http")
-                          ? service?.serviceImage.url
-                          : `${process.env.NEXT_PUBLIC_BASE_URL}${service?.serviceImage?.url}`
-                      }
-                      alt={
-                        service?.serviceImage?.alternativeText ||
-                        service?.heroHeadings
-                      }
-                      className="w-full h-40 object-cover rounded-t-md"
-                      onError={(e) => {
-                        console.error(
-                          "Image failed to load:",
-                          service?.serviceImage?.url
-                        );
-                        e.currentTarget.src = "/fallback-image.jpg"; // Optional fallback image
-                      }}
-                    />
-                    <h3 className="text-lg text-center font-semibold mt-4 mb-4">
-                      {service.name}
-                    </h3>
-                  </div>
-                ))}
-              </div>
-            </section>
 
-            <div className="h-screen flex items-center justify-center relative w-full overflow-hidden">
-              <img
-                src={
-                  service?.ctaImage?.url?.startsWith("http")
-                    ? service?.ctaImage.url
-                    : `${process.env.NEXT_PUBLIC_BASE_URL}${service?.ctaImage?.url}`
-                }
-                alt={
-                  service?.ctaImage?.alternativeText || service?.heroHeadings
-                }
-                className="object-cover w-[90%] h-[80%] opacity-90 shadow-black md:shadow-2xl shadow-md"
-                onError={(e) => {
-                  console.error(
-                    "Image failed to load:",
-                    service?.ctaImage?.url
-                  );
-                  e.currentTarget.src = "/fallback-image.jpg"; // Optional fallback image
-                }}
-              />
-              <h1 className="absolute top-[30%] md:top-[50%] w-[50%] md:w-full left-[54%] text-center lg:left-1/2 -translate-x-1/2 text-lg md:text-3xl text-white font-semibold">
-                {service?.ctaText}
-              </h1>
-              <p className="absolute top-[50%] md:top-[60%] left-[50%] md:left-[76%] w-[80%] md:w-full -translate-x-1/2 text-white text-center font-semibold text-[14px] lg:text-[22px] flex flex-wrap">
-                {service?.ctaPara}
-              </p>
-              <a href="/contactus">
-                <button className="absolute top-[78%] left-[39%] md:left-[50%] bg-LG p-2 rounded-md">
-                  Get Started
-                </button>
-              </a>
+            <div className="px-4 md:px-20 w-full flex flex-col md:flex-row gap-5 md:gap-12">
+              
+              <div className="w-full self-center">
+                {advertisement ? renderDescription(advertisement) : <p>No about content available.</p>}
+              </div>
+                <img
+                  src={getImageUrl(service?.ctaImage?.url)}
+                  alt={service?.ctaImage?.alternativeText || service?.heroHeadings}
+                  className="w-full md:w-[60%] rounded-lg"
+                  onError={(e) => {
+                    console.error("Image failed to load:", service?.ctaImage?.url);
+                    e.currentTarget.src = "/fallback-image.jpg";
+                  }}
+                />
             </div>
           </>
         )}
       </main>
+      <div className="flex md:flex-row flex-col justify-between bg-[#A8CF45]">
+        <div className="w-full self-center px-3 md:px-16">
+              <h1 className="text-[29px] md:text-[36px] font-[600]">Let’s join hands for a sustainable economy</h1>
+              <a href="/contactus">
+              <button className="flex items-center gap-[6px] mt-6 bg-[#000C36] rounded-full text-white p-[6px] px-5">Contact Us <span className="mt-1"><ArrowRight size={15}/></span> </button>
+              </a>
+        </div>
+        <div className="w-full h-full mt-3 md:mt-0 md:h-[50%] block md:flex  md:justify-end">
+          <img src="/contactus/ctaimg.jpeg" className="md:w-[90%] " alt="" />
+        </div>
+      </div>
     </>
   );
+}
+
+// Render rich text blocks with specific styles for headings and paragraphs
+function renderDescription(blocks: any[]) {
+  return blocks.map((block, index) => {
+    switch (block.type) {
+      case "paragraph":
+        return (
+          <p key={index} className="mb-4 text-gray-700 leading-relaxed">
+            {renderChildren(block.children)}
+          </p>
+        );
+
+      case "heading":
+        const HeadingTag = (`h${block.level || 3}` as keyof JSX.IntrinsicElements);
+        return (
+          <HeadingTag key={index} className="mt-6 mb-4 text-2xl md:text-4xl font-semibold text-black">
+            {renderChildren(block.children)}
+          </HeadingTag>
+        );
+
+      default:
+        return <p key={index} className="mb-6">Unsupported block type: {block.type}</p>;
+    }
+  });
+}
+
+// Helper function to render child elements with specific styles
+function renderChildren(children: any[]) {
+  return children.map((child, childIndex) => (
+    <p
+      key={childIndex}
+      style={{ fontWeight: child.bold ? "bold" : "normal" }}
+    >
+      {child.text}
+    </p>
+  ));
 }

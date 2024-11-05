@@ -56,7 +56,7 @@ const ProjectsCat = () => {
   const displayedCategories = new Set();
 
   return (
-    <div className="px-4 overflow-hidden md:px-20 xl:px-40 md:py-20 py-10 w-full">
+    <div className="px-3 overflow-hidden md:px-20 xl:px-40 md:py-20 py-10 w-full">
       <AnimateToView>
         <h1 className="md:text-[40px] text-[30px] mb-3 text-white">
           Our Projects.
@@ -94,7 +94,7 @@ const ProjectsCat = () => {
                     >
                       <div className="relative group cursor-pointer">
                         {/* Add consistent width and height to the container */}
-                        <div className="w-[350px] h-[250px] md:w-[450px] md:h-[300px] overflow-hidden">
+                        <div className="w-[278px] h-[250px] md:w-[450px] md:h-[300px] overflow-hidden">
                           <img
                             src={
                               project.projImage?.url?.startsWith("http")

@@ -1,46 +1,51 @@
 "use client";
+
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import AnimateToView from "../AnimateToView";
-import { Product } from "@/types/all-types"; // Assuming this is your Product type
+import { Product } from "@/types/all-types";
 import qs from "qs";
 import { useRouter } from "next/navigation";
 
 const ProductCat = () => {
   const [categories, setCategories] = useState<Product[]>([]);
-  const [error, setError] = useState<string | null>(null); // State to handle errors
+  const [error, setError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(true);
-  const router = useRouter(); // Router for navigation
+  const router = useRouter();
 
-  // Fetch products and categorize them
   useEffect(() => {
     const fetchProducts = async () => {
       try {
         const baseUrl =
           process.env.NEXT_PUBLIC_BASE_URL ?? "http://localhost:1337";
         const path = "/api/products";
-
-        const query = qs.stringify({
-          populate: {
-            productImage: {
-              fields: ["url", "alternativeText"], // Fetch the product image URL and alt text
+  
+        // Adjusted query structure for nested population
+        const query = qs.stringify(
+          {
+            populate: {
+              productImage: {
+                fields: ["url", "alternativeText"], // Ensuring fields for each image
+              },
             },
           },
-        });
-
+          { encodeValuesOnly: true } // This option helps avoid overly complex URL encoding
+        );
+  
         const url = `${baseUrl}${path}?${query}`;
         const response = await fetch(url);
-
+  
         if (!response.ok) {
           throw new Error("Failed to fetch products");
         }
-
+  
         const data = await response.json();
-
+        console.log("Fetched Products Data:", data); // Log data for verification
+  
         if (!Array.isArray(data.data)) {
           throw new Error("Unexpected API response structure");
         }
-
+  
         setCategories(data.data);
         setIsLoading(false); // Set loading to false after fetching the data
       } catch (error: any) {
@@ -48,9 +53,10 @@ const ProductCat = () => {
         setIsLoading(false);
       }
     };
-
+  
     fetchProducts();
   }, []);
+  
 
   if (isLoading) {
     return <div>Loading...</div>;
@@ -63,7 +69,7 @@ const ProductCat = () => {
   const displayedCategories = new Set();
 
   return (
-    <div className="px-4 md:px-20  md:py-20 py-10 w-full">
+    <div className="px-4 md:px-20 md:py-20 py-10 w-full">
       <AnimateToView>
         <h1 className="md:text-[40px] text-[30px] mb-3 text-white">
           Our featured products.
@@ -78,7 +84,7 @@ const ProductCat = () => {
               curated to meet all your essential livestock needs with ease.
             </p>
           </AnimateToView>
-          <div className="lg:flex grid md:grid-cols-2 grid-cols-1 justify-items-center  items-center gap-6 flex-wrap md:gap-10">
+          <div className="lg:flex grid md:grid-cols-2 grid-cols-1 justify-items-center items-center gap-6 flex-wrap md:gap-10">
             {categories.length > 0 ? (
               categories
                 .filter((product) => {
@@ -103,23 +109,22 @@ const ProductCat = () => {
                         }
                         className=" object-cover object-center transition-transform duration-300 group-hover:scale-110"
                         src={
-                          product.productImage?.url?.startsWith("http")
-                            ? product.productImage.url
-                            : `${process.env.NEXT_PUBLIC_BASE_URL}${
-                                product.productImage?.url ||
-                                "/default-image.jpg"
-                              }`
+                          product.productImage?.[0]?.url
+                            ? product.productImage[0].url.startsWith("http")
+                              ? product.productImage[0].url
+                              : `${process.env.NEXT_PUBLIC_BASE_URL}${product.productImage[0].url}`
+                            : "/default-image.jpg" // Fallback image if no images are available
                         }
                         alt={
-                          product.productImage?.alternativeText ||
+                          product.productImage?.[0]?.alternativeText ||
                           product.productTitle
                         }
                         onError={(e) => {
                           console.error(
-                            `Image failed to load: ${product.productImage?.url}`,
+                            `Image failed to load: ${product.productImage?.[0]?.url}`,
                             e
                           );
-                          e.currentTarget.src = "/default-image.jpg"; // Set fallback image on error
+                          e.currentTarget.src = "/default-image.jpg"; // Fallback image on error
                         }}
                       />
                     </div>
@@ -131,7 +136,7 @@ const ProductCat = () => {
                       </h1>
                       <Link
                         href={`/product/category/${product.productCategory}`}
-                        className="mt-2 inline-flex items-center justify-center text-white bg-[#000C36] px-4 py-2 rounded-full font-semibold transition-colors duration-200 hover:bg-[#000c36ac]" 
+                        className="mt-2 inline-flex items-center justify-center text-white bg-[#000C36] px-4 py-2 rounded-full font-semibold transition-colors duration-200 hover:bg-[#000c36ac]"
                       >
                         Explore <span className="ml-1">&rarr;</span>
                       </Link>

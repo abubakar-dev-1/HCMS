@@ -1,25 +1,26 @@
 interface Product {
-  id?:number
+  id?: number;
   pid: string;
   productTitle: string;
- description: string;
+  description: string;
   productPrice: number;
   SKU: string;
   createdAt: string;
   updatedAt: string;
   publishedAt: string;
-  productCategory:string
-  productSubCategory:string
+  productCategory: string;
+  productSubCategory: string;
   locale: string;
-  documentId?:string
-  productDescription:string
-  isOnSale?:boolean
-  productImage?: {
+  documentId?: string;
+  productDescription: string;
+  isOnSale?: boolean;
+  productImage?: Array<{
     id: number;
     alternativeText: string;
     url: string;
-  };
+  }>;
 }
+
 
   
   type PageInfo = {
