@@ -13,6 +13,7 @@ import { v4 as uuidv4 } from "uuid"; // For generating unique IDs
 import Accordion from "./accordian";
 import LoadingButton from "./Button/LoadingButton";
 import { ArrowUpRight } from "lucide-react";
+import { Skeleton } from "./ui/skeleton";
 
 // Define the type for navigation links
 type LinkWithChildren = {
@@ -176,20 +177,20 @@ const Navbar = () => {
   // Dropdown component for desktop navigation
   const LinkDropdown = ({ link }: { link: LinkWithChildren }) => {
     const isOpen = activeDropdown === link.id; // Check if the dropdown is active
-
+  
     return (
       <motion.div
         initial={{ opacity: 0, y: 10 }}
         animate={isOpen ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
         transition={{ ease: "circOut", duration: 0.15 }}
-        className="absolute top-full left-0 mt-2 rounded-md shadow-lg bg-white z-[1000]" // Set z-index here
+        className="absolute top-full left-0 mt-2 rounded-md shadow-lg bg-white z-50" // Tailwind applied here
       >
-        <div className="py-1">
+        <div className="py-2">
           {link.children?.map((c) => (
             <Link
-              key={c.id} // Now each child has a unique ID
+              key={c.id}
               href={c.href}
-              className="block px-4 py-2 text-sm text-black hover:bg-LG z-[1000]"
+              className="block px-4 py-2 text-sm text-black hover:bg-gray-100"
             >
               {c.title}
             </Link>
@@ -198,13 +199,16 @@ const Navbar = () => {
       </motion.div>
     );
   };
+  
+  
 
   // Show loading or error states
   if (isLoading) {
     return (
       <header className="mt-5 mx-5 rounded-full flex flex-col transition duration-200 ease-in-out z-50">
         <div className="w-full flex justify-center py-4">
-          <p>Loading...</p>
+          {/* Replace Loading text with Skeleton */}
+          <Skeleton className="w-[200px] h-[30px]" />
         </div>
       </header>
     );
@@ -224,9 +228,9 @@ const Navbar = () => {
     <header
       className={`${
         isVisible ? "bg-white text-black  rounded-full" : " text-white"
-      } rounded-full  transition duration-200 ease-in-out z-100`}
+      } rounded-full  transition duration-200 ease-in-out  relative z-40`}
     >
-      <nav className="w-full text-black flex py-3 items-center justify-between border-gray-200 px-4 xl:px-16">
+      <nav className="w-full text-black relative  flex py-3 items-center justify-between border-gray-200 px-4 xl:px-16">
         {/* Logo */}
         <Link href="/" className="min-w-max">
           <img src="/logo.png" alt="logo" className="md:h-[60px] h-[40px]" />

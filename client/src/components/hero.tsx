@@ -1,4 +1,4 @@
-'use client';
+"use client";
 import { motion, useAnimation } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import { useState, useEffect } from "react";
@@ -7,6 +7,7 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Navbar from "./navbar";
+import { Skeleton } from "./ui/skeleton";
 
 const Hero = () => {
   const controls = useAnimation();
@@ -22,15 +23,15 @@ const Hero = () => {
       );
       const data = await res.json();
       const imageUrls = data.data[0]?.heroImages?.map((imgObj: any) => {
-        const imgUrl = imgObj.url.startsWith('http')
+        const imgUrl = imgObj.url.startsWith("http")
           ? imgObj.url
           : `${process.env.NEXT_PUBLIC_BASE_URL}${imgObj.url}`;
         return imgUrl;
       });
       console.log("Clean Image URLs:", imageUrls);
       setImages(imageUrls || []);
-      
-      console.log("images are ", imageUrls)
+
+      console.log("images are ", imageUrls);
 
       setImages(imageUrls || []);
     } catch (error) {
@@ -72,9 +73,7 @@ const Hero = () => {
   const zoomScale = Math.max(1 - scrollPos / 1000, 0.8);
 
   return (
-     
     <div>
-
       <div className="flex w-full items-center h-screen justify-center ">
         {/* Zoom effect applied to image container */}
         <div
@@ -90,16 +89,13 @@ const Hero = () => {
           {images.length > 0 ? (
             <Slider {...settings}>
               {images.map((img, i) => (
-                <div
-                  key={i}
-                  className="flex w-full relative"
-                >
+                <div key={i} className="flex w-full relative">
                   <img
                     src={img}
                     alt={`Slide ${i + 1}`}
                     className="w-full h-screen lg:h-auto object-cover object-center"
                     style={{
-                     // Adjust as needed
+                      // Adjust as needed
                       overflow: "hidden",
                     }}
                   />
@@ -107,7 +103,10 @@ const Hero = () => {
               ))}
             </Slider>
           ) : (
-            <p>Loading images...</p>
+            <div className="flex flex-col gap-4">
+              <Skeleton className="w-full h-[400px]" />
+              <Skeleton className="w-full h-[50px]" />
+            </div>
           )}
 
           {/* Animated Text */}
@@ -125,7 +124,7 @@ const Hero = () => {
             <div className="flex px-2 md:px-4 gap-[20px] flex-col w-full justify-center items-center">
               <p className="text-white text-[16px] md:text-[36px]">
                 <strong className="text-[#A8CF45] w-full">SOLVE</strong> -
-                Solutions for Livestock <br />    Value-added Enterprises
+                Solutions for Livestock <br /> Value-added Enterprises
               </p>
               {/* <p className="text-white md:w-[60%] w-full">
                 Lorem ipsum dolor sit amet consectetur adipisicing elit.

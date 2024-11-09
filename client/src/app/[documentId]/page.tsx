@@ -65,6 +65,7 @@ export default function ServicePage() {
           <p className="text-red-500">Error: {error}</p>
         ) : (
           <>
+            {/* Hero Section */}
             <div className="h-screen flex items-center justify-center relative w-full overflow-hidden">
               <img
                 src={getImageUrl(service?.heroImage?.url)}
@@ -80,56 +81,76 @@ export default function ServicePage() {
               </h1>
             </div>
 
-            <div className="px-4 md:px-20 w-full flex flex-col md:flex-row justify-between md:gap-20 gap-5">
-              <div className="w-[100%] rounded-lg flex gap-20">
-                <img
-                  src={getImageUrl(service?.serviceImage?.url)}
-                  alt={service?.serviceImage?.alternativeText || service?.heroHeadings}
-                  className="w-full md:w-[100%] rounded-lg"
-                  onError={(e) => {
-                    console.error("Image failed to load:", service?.serviceImage?.url);
-                    e.currentTarget.src = "/fallback-image.jpg";
-                  }}
-                />
+            {/* Service About Section */}
+            {about || service?.serviceImage?.url ? (
+              <div className="px-4 md:px-20 w-full flex flex-col md:flex-row justify-between md:gap-20 gap-5">
+                {service?.serviceImage?.url && (
+                  <div className="w-full md:w-full  rounded-lg flex">
+                    <img
+                      src={getImageUrl(service?.serviceImage?.url)}
+                      alt={service?.serviceImage?.alternativeText || service?.heroHeadings}
+                      className="w-full rounded-lg"
+                      onError={(e) => {
+                        console.error("Image failed to load:", service?.serviceImage?.url);
+                        e.currentTarget.src = "/fallback-image.jpg";
+                      }}
+                    />
+                  </div>
+                )}
+                {about && (
+                  <div className={`w-full ${service?.serviceImage?.url ? "" : "md:w-full"} py-0 md:py-16`}>
+                    {renderDescription(about)}
+                  </div>
+                )}
               </div>
-              <div className="w-full md:w-[50%] py-0 md:py-16">
-                {about ? renderDescription(about) : <p>No about content available.</p>}
-              </div>
-            </div>
+            ) : null}
 
-            <div className="flex flex-col md:flex-row justify-start bg-LG py-8 items-start md:px-24 px-4">
-              <div className="md:w-[70%] w-full">
-                {content ? renderDescription(content) : <p>No content available.</p>}
+            {/* Service Content Section */}
+            {content && (
+              <div className="flex flex-col md:flex-row justify-start bg-LG py-8 items-start md:px-24 px-4">
+                <div className="md:w-[70%] w-full">{renderDescription(content)}</div>
               </div>
-            </div>
+            )}
 
-            <div className="px-4 md:px-20 w-full flex flex-col md:flex-row gap-5 md:gap-12">
-              
-              <div className="w-full self-center">
-                {advertisement ? renderDescription(advertisement) : <p>No about content available.</p>}
+            {/* Service Advertisement Section */}
+            {advertisement || service?.ctaImage?.url ? (
+              <div className="px-4 md:px-20 w-full flex flex-col md:flex-row gap-5 md:gap-12">
+                {advertisement && (
+                  <div className={`w-full ${service?.ctaImage?.url ? "md:w-[40%]" : "md:w-full"} self-center`}>
+                    {renderDescription(advertisement)}
+                  </div>
+                )}
+                {service?.ctaImage?.url && (
+                  <div className="w-full md:auto">
+                    <img
+                      src={getImageUrl(service?.ctaImage?.url)}
+                      alt={service?.ctaImage?.alternativeText || service?.heroHeadings}
+                      className="w-full rounded-lg"
+                      onError={(e) => {
+                        console.error("Image failed to load:", service?.ctaImage?.url);
+                        e.currentTarget.src = "/fallback-image.jpg";
+                      }}
+                    />
+                  </div>
+                )}
               </div>
-                <img
-                  src={getImageUrl(service?.ctaImage?.url)}
-                  alt={service?.ctaImage?.alternativeText || service?.heroHeadings}
-                  className="w-full md:w-[60%] rounded-lg"
-                  onError={(e) => {
-                    console.error("Image failed to load:", service?.ctaImage?.url);
-                    e.currentTarget.src = "/fallback-image.jpg";
-                  }}
-                />
-            </div>
+            ) : null}
           </>
         )}
       </main>
+
+      {/* Call to Action Section */}
       <div className="flex md:flex-row flex-col justify-between bg-[#A8CF45]">
         <div className="w-full self-center px-3 md:px-16">
-              <h1 className="text-[29px] md:text-[36px] font-[600]">Let’s join hands for a sustainable economy</h1>
-              <a href="/contactus">
-              <button className="flex items-center gap-[6px] mt-6 bg-[#000C36] rounded-full text-white p-[6px] px-5">Contact Us <span className="mt-1"><ArrowRight size={15}/></span> </button>
-              </a>
+          <h1 className="text-[29px] md:text-[36px] font-[600]">Let’s join hands for a sustainable economy</h1>
+          <a href="/contactus">
+            <button className="flex items-center gap-[6px] mt-6 bg-[#000C36] rounded-full text-white p-[6px] px-5">
+              Contact Us <span className="mt-1"><ArrowRight size={15} /></span>
+            </button>
+          </a>
         </div>
-        <div className="w-full h-full mt-3 md:mt-0 md:h-[50%] block md:flex  md:justify-end">
-          <img src="/contactus/ctaimg.jpeg" className="md:w-[90%] " alt="" />
+        <div className="w-full h-full mt-3 md:mt-0 md:h-[50%] block md:flex md:justify-end">
+          <img src="/contactus/ctaimg.jpeg" className="md:w-[90%]" alt="" />
         </div>
       </div>
     </>
